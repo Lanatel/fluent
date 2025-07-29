@@ -66,7 +66,7 @@ class ManyToOne extends AbstractRelation
      *
      * @return JoinColumn|false
      */
-    public function getJoinColumn(callable $callback = null)
+    public function getJoinColumn(?callable $callback = null)
     {
         $joinColumn = reset($this->joinColumns);
 

@@ -24,7 +24,7 @@ trait Queueable
      * @param Buildable     $buildable
      * @param callable|null $callback
      */
-    public function callbackAndQueue(Buildable $buildable, callable $callback = null)
+    public function callbackAndQueue(Buildable $buildable, ?callable $callback = null)
     {
         $this->callIfCallable($callback, $buildable);
 

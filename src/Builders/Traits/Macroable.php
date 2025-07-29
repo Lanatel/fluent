@@ -15,7 +15,7 @@ trait Macroable
      * @param string        $method
      * @param callable|null $callback
      */
-    public static function macro($method, callable $callback = null)
+    public static function macro($method, ?callable $callback = null)
     {
         if (!is_callable($callback)) {
             throw new InvalidArgumentException('Macros should be used with a closure argument, none given');

@@ -15,7 +15,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function hasOne($entity, $field = null, callable $callback = null)
+    public function hasOne($entity, $field = null, ?callable $callback = null)
     {
         return $this->oneToOne($entity, $field, $callback)->ownedBy(
             $this->guessSingularField($entity)
@@ -25,7 +25,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function oneToOne($entity, $field = null, callable $callback = null)
+    public function oneToOne($entity, $field = null, ?callable $callback = null)
     {
         return $this->addRelation(
             new OneToOne(
@@ -41,7 +41,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function belongsTo($entity, $field = null, callable $callback = null)
+    public function belongsTo($entity, $field = null, ?callable $callback = null)
     {
         return $this->manyToOne($entity, $field, $callback);
     }
@@ -49,7 +49,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function manyToOne($entity, $field = null, callable $callback = null)
+    public function manyToOne($entity, $field = null, ?callable $callback = null)
     {
         return $this->addRelation(
             new ManyToOne(
@@ -65,7 +65,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function hasMany($entity, $field = null, callable $callback = null)
+    public function hasMany($entity, $field = null, ?callable $callback = null)
     {
         return $this->oneToMany($entity, $field, $callback);
     }
@@ -73,7 +73,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function oneToMany($entity, $field = null, callable $callback = null)
+    public function oneToMany($entity, $field = null, ?callable $callback = null)
     {
         return $this->addRelation(
             new OneToMany(
@@ -89,7 +89,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function belongsToMany($entity, $field = null, callable $callback = null)
+    public function belongsToMany($entity, $field = null, ?callable $callback = null)
     {
         return $this->manyToMany($entity, $field, $callback);
     }
@@ -97,7 +97,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function manyToMany($entity, $field = null, callable $callback = null)
+    public function manyToMany($entity, $field = null, ?callable $callback = null)
     {
         return $this->addRelation(
             new ManyToMany(
@@ -113,7 +113,7 @@ trait Relations
     /**
      * {@inheritdoc}
      */
-    public function addRelation(Relation $relation, callable $callback = null)
+    public function addRelation(Relation $relation, ?callable $callback = null)
     {
         $this->callbackAndQueue($relation, $callback);
 
@@ -153,7 +153,7 @@ trait Relations
      * @param Buildable     $buildable
      * @param callable|null $callback
      */
-    abstract protected function callbackAndQueue(Buildable $buildable, callable $callback = null);
+    abstract protected function callbackAndQueue(Buildable $buildable, ?callable $callback = null);
 
     /**
      * @return \Doctrine\ORM\Mapping\NamingStrategy

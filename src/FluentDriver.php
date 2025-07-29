@@ -32,7 +32,7 @@ class FluentDriver implements MappingDriver
      */
     public function __construct(
         array $mappings = [],
-        NamingStrategy $namingStrategy = null
+        ?NamingStrategy $namingStrategy = null
     ) {
         $this->fluentFactory = function (ClassMetadata $metadata) use ($namingStrategy) {
             return new Builder(new ClassMetadataBuilder($metadata), $namingStrategy);

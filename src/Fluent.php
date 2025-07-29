@@ -3,14 +3,14 @@
 namespace LaravelDoctrine\Fluent;
 
 /**
- * @method Builders\Field array($name, callable $callback = null)
+ * @method Builders\Field array($name, ?callable $callback = null)
  *
  * Extensions:
  * @method void                              loggable(string $logEntry = null)
  * @method Extensions\Gedmo\SoftDeleteable   softDelete(string $fieldName = 'deletedAt', string $type = 'dateTime')
  * @method void                              timestamps(string $createdAt = 'createdAt', string $updatedAt = 'updatedAt', string $type = 'dateTime')
  * @method Extensions\Gedmo\TranslationClass translationClass(string $class)
- * @method Extensions\Gedmo\Tree             tree(callable $callback = null)
+ * @method Extensions\Gedmo\Tree             tree(?callable $callback = null)
  * @method Extensions\Gedmo\Uploadable       uploadable()
  * @method                                   locale(string $fieldName)
  */
@@ -22,14 +22,14 @@ interface Fluent extends Buildable
      *
      * @return Builders\Table
      */
-    public function table($name, callable $callback = null);
+    public function table($name, ?callable $callback = null);
 
     /**
      * @param callable|null $callback
      *
      * @return Builders\Entity
      */
-    public function entity(callable $callback = null);
+    public function entity(?callable $callback = null);
 
     /**
      * @param array|string $columns
@@ -52,7 +52,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function field($type, $name, callable $callback = null);
+    public function field($type, $name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -60,7 +60,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function increments($name, callable $callback = null);
+    public function increments($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -68,7 +68,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function smallIncrements($name, callable $callback = null);
+    public function smallIncrements($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -76,7 +76,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function bigIncrements($name, callable $callback = null);
+    public function bigIncrements($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -84,7 +84,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function string($name, callable $callback = null);
+    public function string($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -92,7 +92,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function text($name, callable $callback = null);
+    public function text($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -100,7 +100,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function integer($name, callable $callback = null);
+    public function integer($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -108,7 +108,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function smallInteger($name, callable $callback = null);
+    public function smallInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -116,7 +116,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function bigInteger($name, callable $callback = null);
+    public function bigInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -124,7 +124,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function unsignedSmallInteger($name, callable $callback = null);
+    public function unsignedSmallInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -132,7 +132,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function unsignedInteger($name, callable $callback = null);
+    public function unsignedInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -140,7 +140,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function unsignedBigInteger($name, callable $callback = null);
+    public function unsignedBigInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -148,7 +148,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function float($name, callable $callback = null);
+    public function float($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -156,7 +156,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function decimal($name, callable $callback = null);
+    public function decimal($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -164,7 +164,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function boolean($name, callable $callback = null);
+    public function boolean($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -172,7 +172,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function jsonArray($name, callable $callback = null);
+    public function jsonArray($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -180,7 +180,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function date($name, callable $callback = null);
+    public function date($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -188,7 +188,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function dateTime($name, callable $callback = null);
+    public function dateTime($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -196,7 +196,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function dateTimeTz($name, callable $callback = null);
+    public function dateTimeTz($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -204,7 +204,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function time($name, callable $callback = null);
+    public function time($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -212,7 +212,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function carbonDateTime($name, callable $callback = null);
+    public function carbonDateTime($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -220,7 +220,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function carbonDateTimeTz($name, callable $callback = null);
+    public function carbonDateTimeTz($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -228,7 +228,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function carbonDate($name, callable $callback = null);
+    public function carbonDate($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -236,7 +236,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function carbonTime($name, callable $callback = null);
+    public function carbonTime($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -244,7 +244,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function zendDate($name, callable $callback = null);
+    public function zendDate($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -252,7 +252,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function timestamp($name, callable $callback = null);
+    public function timestamp($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -260,7 +260,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function timestampTz($name, callable $callback = null);
+    public function timestampTz($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -268,7 +268,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function binary($name, callable $callback = null);
+    public function binary($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -276,7 +276,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function rememberToken($name = 'rememberToken', callable $callback = null);
+    public function rememberToken($name = 'rememberToken', ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -285,7 +285,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\OneToOne
      */
-    public function hasOne($entity, $field = null, callable $callback = null);
+    public function hasOne($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -294,7 +294,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\OneToOne
      */
-    public function oneToOne($entity, $field = null, callable $callback = null);
+    public function oneToOne($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -303,7 +303,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\ManyToOne
      */
-    public function belongsTo($entity, $field = null, callable $callback = null);
+    public function belongsTo($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -312,7 +312,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\ManyToOne
      */
-    public function manyToOne($entity, $field = null, callable $callback = null);
+    public function manyToOne($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -321,7 +321,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\OneToMany
      */
-    public function hasMany($entity, $field = null, callable $callback = null);
+    public function hasMany($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -330,7 +330,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\OneToMany
      */
-    public function oneToMany($entity, $field = null, callable $callback = null);
+    public function oneToMany($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -339,7 +339,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\ManyToMany
      */
-    public function belongsToMany($entity, $field = null, callable $callback = null);
+    public function belongsToMany($entity, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $entity
@@ -348,7 +348,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\ManyToMany
      */
-    public function manyToMany($entity, $field, callable $callback = null);
+    public function manyToMany($entity, $field, ?callable $callback = null);
 
     /**
      * Adds a custom relation to the entity.
@@ -358,7 +358,7 @@ interface Fluent extends Buildable
      *
      * @return Relations\Relation
      */
-    public function addRelation(Relations\Relation $relation, callable $callback = null);
+    public function addRelation(Relations\Relation $relation, ?callable $callback = null);
 
     /**
      * @return bool
@@ -374,7 +374,7 @@ interface Fluent extends Buildable
      * @param string        $method
      * @param callable|null $callback
      */
-    public static function macro($method, callable $callback = null);
+    public static function macro($method, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -382,7 +382,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function guid($name, callable $callback = null);
+    public function guid($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -390,7 +390,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function blob($name, callable $callback = null);
+    public function blob($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -398,7 +398,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function object($name, callable $callback = null);
+    public function object($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -406,7 +406,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Field
      */
-    public function simpleArray($name, callable $callback = null);
+    public function simpleArray($name, ?callable $callback = null);
 
     /**
      * @param string        $embeddable
@@ -415,7 +415,7 @@ interface Fluent extends Buildable
      *
      * @return Builders\Embedded
      */
-    public function embed($embeddable, $field = null, callable $callback = null);
+    public function embed($embeddable, $field = null, ?callable $callback = null);
 
     /**
      * @param string        $type
@@ -423,21 +423,21 @@ interface Fluent extends Buildable
      *
      * @return Builders\Inheritance\Inheritance
      */
-    public function inheritance($type, callable $callback = null);
+    public function inheritance($type, ?callable $callback = null);
 
     /**
      * @param callable|null $callback
      *
      * @return Builders\Inheritance\Inheritance
      */
-    public function singleTableInheritance(callable $callback = null);
+    public function singleTableInheritance(?callable $callback = null);
 
     /**
      * @param callable|null $callback
      *
      * @return Builders\Inheritance\Inheritance
      */
-    public function joinedTableInheritance(callable $callback = null);
+    public function joinedTableInheritance(?callable $callback = null);
 
     /**
      * @param array|string $fields
@@ -459,12 +459,12 @@ interface Fluent extends Buildable
      *
      * @return Builders\LifecycleEvents
      */
-    public function events(callable $callback = null);
+    public function events(?callable $callback = null);
 
     /**
      * @param callable|null $callback
      *
      * @return Builders\EntityListeners
      */
-    public function listen(callable $callback = null);
+    public function listen(?callable $callback = null);
 }

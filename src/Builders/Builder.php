@@ -9,7 +9,7 @@ use LaravelDoctrine\Fluent\Fluent;
 use LogicException;
 
 /**
- * @method Field array($name, callable $callback = null)
+ * @method Field array($name, ?callable $callback = null)
  */
 class Builder extends AbstractBuilder implements Fluent
 {
@@ -26,7 +26,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function table($name, callable $callback = null)
+    public function table($name, ?callable $callback = null)
     {
         $this->disallowInEmbeddedClasses();
 
@@ -40,7 +40,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function entity(callable $callback = null)
+    public function entity(?callable $callback = null)
     {
         $this->disallowInEmbeddedClasses();
 
@@ -54,7 +54,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function inheritance($type, callable $callback = null)
+    public function inheritance($type, ?callable $callback = null)
     {
         $inheritance = Inheritance\InheritanceFactory::create($type, $this->builder);
 
@@ -66,7 +66,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function singleTableInheritance(callable $callback = null)
+    public function singleTableInheritance(?callable $callback = null)
     {
         return $this->inheritance(Inheritance\Inheritance::SINGLE, $callback);
     }
@@ -74,7 +74,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function joinedTableInheritance(callable $callback = null)
+    public function joinedTableInheritance(?callable $callback = null)
     {
         return $this->inheritance(Inheritance\Inheritance::JOINED, $callback);
     }
@@ -82,7 +82,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function embed($embeddable, $field = null, callable $callback = null)
+    public function embed($embeddable, $field = null, ?callable $callback = null)
     {
         $embedded = new Embedded(
             $this->builder,
@@ -116,7 +116,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function events(callable $callback = null)
+    public function events(?callable $callback = null)
     {
         $events = new LifecycleEvents($this->builder);
 
@@ -128,7 +128,7 @@ class Builder extends AbstractBuilder implements Fluent
     /**
      * {@inheritdoc}
      */
-    public function listen(callable $callback = null)
+    public function listen(?callable $callback = null)
     {
         $events = new EntityListeners($this->builder);
 
@@ -151,7 +151,7 @@ class Builder extends AbstractBuilder implements Fluent
      *
      * @return Field
      */
-    protected function setArray($name, callable $callback = null)
+    protected function setArray($name, ?callable $callback = null)
     {
         return $this->field(Types::ARRAY, $name, $callback);
     }

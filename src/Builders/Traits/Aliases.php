@@ -7,7 +7,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function increments($name, callable $callback = null)
+    public function increments($name, ?callable $callback = null)
     {
         $this->disallowInEmbeddedClasses();
 
@@ -17,7 +17,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function smallIncrements($name, callable $callback = null)
+    public function smallIncrements($name, ?callable $callback = null)
     {
         $this->disallowInEmbeddedClasses();
 
@@ -27,7 +27,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function bigIncrements($name, callable $callback = null)
+    public function bigIncrements($name, ?callable $callback = null)
     {
         $this->disallowInEmbeddedClasses();
 
@@ -37,7 +37,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function unsignedSmallInteger($name, callable $callback = null)
+    public function unsignedSmallInteger($name, ?callable $callback = null)
     {
         return $this->smallInteger($name, $callback)->unsigned();
     }
@@ -45,7 +45,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function unsignedInteger($name, callable $callback = null)
+    public function unsignedInteger($name, ?callable $callback = null)
     {
         return $this->integer($name, $callback)->unsigned();
     }
@@ -53,7 +53,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function unsignedBigInteger($name, callable $callback = null)
+    public function unsignedBigInteger($name, ?callable $callback = null)
     {
         return $this->bigInteger($name, $callback)->unsigned();
     }
@@ -61,7 +61,7 @@ trait Aliases
     /**
      * {@inheritdoc}
      */
-    public function rememberToken($name = 'rememberToken', callable $callback = null)
+    public function rememberToken($name = 'rememberToken', ?callable $callback = null)
     {
         return $this->string($name, $callback)->nullable()->length(100);
     }
@@ -79,7 +79,7 @@ trait Aliases
      *
      * @return \LaravelDoctrine\Fluent\Builders\Field
      */
-    abstract public function integer($name, callable $callback = null);
+    abstract public function integer($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -87,7 +87,7 @@ trait Aliases
      *
      * @return \LaravelDoctrine\Fluent\Builders\Field
      */
-    abstract public function smallInteger($name, callable $callback = null);
+    abstract public function smallInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -95,7 +95,7 @@ trait Aliases
      *
      * @return \LaravelDoctrine\Fluent\Builders\Field
      */
-    abstract public function bigInteger($name, callable $callback = null);
+    abstract public function bigInteger($name, ?callable $callback = null);
 
     /**
      * @param string        $name
@@ -103,5 +103,5 @@ trait Aliases
      *
      * @return \LaravelDoctrine\Fluent\Builders\Field
      */
-    abstract public function string($name, callable $callback = null);
+    abstract public function string($name, ?callable $callback = null);
 }

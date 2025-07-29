@@ -34,7 +34,7 @@ class Tree implements Buildable, Extension
      */
     public static function enable()
     {
-        Builder::macro(self::MACRO_METHOD, function (Fluent $builder, callable $callback = null) {
+        Builder::macro(self::MACRO_METHOD, function (Fluent $builder, ?callable $callback = null) {
             $tree = new static($builder);
 
             if (is_callable($callback)) {
