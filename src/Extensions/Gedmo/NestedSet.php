@@ -45,7 +45,7 @@ class NestedSet extends TreeStrategy implements Buildable, Extension, Delay
      *
      * @return $this
      */
-    public function left($field = 'left', $type = 'integer', callable $callback = null)
+    public function left($field = 'left', $type = 'integer', ?callable $callback = null)
     {
         $this->validateNumericField($type, $field);
 
@@ -65,7 +65,7 @@ class NestedSet extends TreeStrategy implements Buildable, Extension, Delay
      *
      * @return $this
      */
-    public function right($field = 'right', $type = 'integer', callable $callback = null)
+    public function right($field = 'right', $type = 'integer', ?callable $callback = null)
     {
         $this->validateNumericField($type, $field);
 
@@ -82,7 +82,7 @@ class NestedSet extends TreeStrategy implements Buildable, Extension, Delay
      *
      * @return $this
      */
-    public function root($field = 'root', callable $callback = null)
+    public function root($field = 'root', ?callable $callback = null)
     {
         $this->addSelfReferencingRelation($field, $callback);
 

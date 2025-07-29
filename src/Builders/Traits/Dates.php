@@ -9,7 +9,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function date($name, callable $callback = null)
+    public function date($name, ?callable $callback = null)
     {
         return $this->field(Types::DATE_MUTABLE, $name, $callback);
     }
@@ -17,7 +17,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function dateTime($name, callable $callback = null)
+    public function dateTime($name, ?callable $callback = null)
     {
         return $this->field(Types::DATETIME_MUTABLE, $name, $callback);
     }
@@ -25,7 +25,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function dateTimeTz($name, callable $callback = null)
+    public function dateTimeTz($name, ?callable $callback = null)
     {
         return $this->field(Types::DATETIMETZ_MUTABLE, $name, $callback);
     }
@@ -33,7 +33,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function time($name, callable $callback = null)
+    public function time($name, ?callable $callback = null)
     {
         return $this->field(Types::TIME_MUTABLE, $name, $callback);
     }
@@ -41,7 +41,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function carbonDateTime($name, callable $callback = null)
+    public function carbonDateTime($name, ?callable $callback = null)
     {
         return $this->field('carbondatetime', $name, $callback);
     }
@@ -49,7 +49,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function carbonDateTimeTz($name, callable $callback = null)
+    public function carbonDateTimeTz($name, ?callable $callback = null)
     {
         return $this->field('carbondatetimetz', $name, $callback);
     }
@@ -57,7 +57,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function carbonDate($name, callable $callback = null)
+    public function carbonDate($name, ?callable $callback = null)
     {
         return $this->field('carbondate', $name, $callback);
     }
@@ -65,7 +65,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function carbonTime($name, callable $callback = null)
+    public function carbonTime($name, ?callable $callback = null)
     {
         return $this->field('carbontime', $name, $callback);
     }
@@ -73,7 +73,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function zendDate($name, callable $callback = null)
+    public function zendDate($name, ?callable $callback = null)
     {
         return $this->field('zenddate', $name, $callback);
     }
@@ -81,7 +81,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function timestamp($name, callable $callback = null)
+    public function timestamp($name, ?callable $callback = null)
     {
         return $this->carbonDateTime($name, $callback);
     }
@@ -89,7 +89,7 @@ trait Dates
     /**
      * {@inheritdoc}
      */
-    public function timestampTz($name, callable $callback = null)
+    public function timestampTz($name, ?callable $callback = null)
     {
         return $this->carbonDateTimeTz($name, $callback);
     }
@@ -101,5 +101,5 @@ trait Dates
      *
      * @return \LaravelDoctrine\Fluent\Builders\Field
      */
-    abstract public function field($type, $name, callable $callback = null);
+    abstract public function field($type, $name, ?callable $callback = null);
 }

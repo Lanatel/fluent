@@ -161,7 +161,7 @@ class Field implements Buildable
      *
      * @return Field
      */
-    public function generatedValue(callable $callback = null)
+    public function generatedValue(?callable $callback = null)
     {
         $generatedValue = new GeneratedValue($this->fieldBuilder, $this->classMetadata);
 

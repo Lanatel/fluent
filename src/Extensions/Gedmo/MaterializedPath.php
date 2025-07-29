@@ -67,7 +67,7 @@ class MaterializedPath extends TreeStrategy implements Buildable, Extension, Del
      *
      * @return $this
      */
-    public function path($field = 'path', $separator = '|', callable $callback = null)
+    public function path($field = 'path', $separator = '|', ?callable $callback = null)
     {
         $this->mapField('string', $field, null, true);
 

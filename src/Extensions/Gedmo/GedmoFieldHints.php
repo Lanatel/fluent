@@ -16,7 +16,7 @@ namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
  * @method void           treeLeft()
  * @method void           treeLevel()
  * @method void           treeParent()
- * @method TreePath       treePath($separator = '|', callable $callback = null)
+ * @method TreePath       treePath($separator = '|', ?callable $callback = null)
  * @method void           treePathHash()
  * @method void           treePathSource()
  * @method void           treeRight()

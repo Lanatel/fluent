@@ -11,7 +11,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function field($type, $name, callable $callback = null)
+    public function field($type, $name, ?callable $callback = null)
     {
         $field = Field::make($this->getBuilder(), $type, $name);
 
@@ -23,7 +23,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function string($name, callable $callback = null)
+    public function string($name, ?callable $callback = null)
     {
         return $this->field(Types::STRING, $name, $callback);
     }
@@ -31,7 +31,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function text($name, callable $callback = null)
+    public function text($name, ?callable $callback = null)
     {
         return $this->field(Types::TEXT, $name, $callback);
     }
@@ -39,7 +39,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function integer($name, callable $callback = null)
+    public function integer($name, ?callable $callback = null)
     {
         return $this->field(Types::INTEGER, $name, $callback);
     }
@@ -47,7 +47,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function smallInteger($name, callable $callback = null)
+    public function smallInteger($name, ?callable $callback = null)
     {
         return $this->field(Types::SMALLINT, $name, $callback);
     }
@@ -55,7 +55,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function bigInteger($name, callable $callback = null)
+    public function bigInteger($name, ?callable $callback = null)
     {
         return $this->field(Types::BIGINT, $name, $callback);
     }
@@ -63,7 +63,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function guid($name, callable $callback = null)
+    public function guid($name, ?callable $callback = null)
     {
         return $this->field(Types::GUID, $name, $callback);
     }
@@ -71,7 +71,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function blob($name, callable $callback = null)
+    public function blob($name, ?callable $callback = null)
     {
         return $this->field(Types::BLOB, $name, $callback);
     }
@@ -79,7 +79,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function object($name, callable $callback = null)
+    public function object($name, ?callable $callback = null)
     {
         return $this->field(Types::OBJECT, $name, $callback);
     }
@@ -87,7 +87,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function float($name, callable $callback = null)
+    public function float($name, ?callable $callback = null)
     {
         return $this->field(Types::FLOAT, $name, $callback)->precision(8)->scale(2);
     }
@@ -95,7 +95,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function decimal($name, callable $callback = null)
+    public function decimal($name, ?callable $callback = null)
     {
         return $this->field(Types::DECIMAL, $name, $callback)->precision(8)->scale(2);
     }
@@ -103,7 +103,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function boolean($name, callable $callback = null)
+    public function boolean($name, ?callable $callback = null)
     {
         return $this->field(Types::BOOLEAN, $name, $callback);
     }
@@ -111,7 +111,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function simpleArray($name, callable $callback = null)
+    public function simpleArray($name, ?callable $callback = null)
     {
         return $this->field(Types::SIMPLE_ARRAY, $name, $callback);
     }
@@ -119,7 +119,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function jsonArray($name, callable $callback = null)
+    public function jsonArray($name, ?callable $callback = null)
     {
         return $this->field(Types::JSON, $name, $callback);
     }
@@ -127,7 +127,7 @@ trait Fields
     /**
      * {@inheritdoc}
      */
-    public function binary($name, callable $callback = null)
+    public function binary($name, ?callable $callback = null)
     {
         return $this->field(Types::BINARY, $name, $callback)->nullable();
     }
@@ -141,5 +141,5 @@ trait Fields
      * @param Buildable     $buildable
      * @param callable|null $callback
      */
-    abstract protected function callbackAndQueue(Buildable $buildable, callable $callback = null);
+    abstract protected function callbackAndQueue(Buildable $buildable, ?callable $callback = null);
 }

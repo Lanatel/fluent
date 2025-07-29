@@ -52,7 +52,7 @@ abstract class TreeStrategy implements Buildable, Extension
      *
      * @return $this
      */
-    public function level($field = 'level', $type = 'integer', callable $callback = null)
+    public function level($field = 'level', $type = 'integer', ?callable $callback = null)
     {
         $this->validateNumericField($type, $field);
 
@@ -69,7 +69,7 @@ abstract class TreeStrategy implements Buildable, Extension
      *
      * @return $this
      */
-    public function parent($field = 'parent', callable $callback = null)
+    public function parent($field = 'parent', ?callable $callback = null)
     {
         $this->addSelfReferencingRelation($field, $callback);
 
@@ -104,7 +104,7 @@ abstract class TreeStrategy implements Buildable, Extension
      * @param callable|null $callback
      * @param bool|false    $nullable
      */
-    protected function mapField($type, $field, callable $callback = null, $nullable = false)
+    protected function mapField($type, $field, ?callable $callback = null, $nullable = false)
     {
         $this->builder->field($type, $field, $callback)->nullable($nullable);
     }
@@ -136,7 +136,7 @@ abstract class TreeStrategy implements Buildable, Extension
      * @param string        $field
      * @param callable|null $callback
      */
-    protected function addSelfReferencingRelation($field, callable $callback = null)
+    protected function addSelfReferencingRelation($field, ?callable $callback = null)
     {
         $this->builder->belongsTo($this->myself(), $field, $callback)->nullable();
     }
