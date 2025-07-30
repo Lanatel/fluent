@@ -86,7 +86,7 @@ abstract class AbstractRelation implements Relation
     public function cascade(array $cascade)
     {
         foreach ($cascade as $name) {
-            $method = 'cascade'.(InflectorFactory::create()->build())->classify(strtolower($name));
+            $method = 'cascade'.InflectorFactory::create()->build()->classify(strtolower($name));
 
             if (!method_exists($this->association, $method)) {
                 throw new InvalidArgumentException('Cascade ['.$name.'] does not exist');
@@ -105,7 +105,7 @@ abstract class AbstractRelation implements Relation
      */
     public function fetch($strategy)
     {
-        $method = 'fetch'.(InflectorFactory::create()->build())->classify(strtolower($strategy));
+        $method = 'fetch'.InflectorFactory::create()->build()->classify(strtolower($strategy));
 
         if (!method_exists($this->association, $method)) {
             throw new InvalidArgumentException('Fetch ['.$strategy.'] does not exist');

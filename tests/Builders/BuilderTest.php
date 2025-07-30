@@ -41,7 +41,8 @@ use Tests\Stubs\StubEntityListener;
 
 class BuilderTest extends TestCase
 {
-    use IsMacroable, MockeryPHPUnitIntegration;
+    use IsMacroable;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var ClassMetadataBuilder
@@ -549,8 +550,9 @@ class BuilderTest extends TestCase
 
         $result = $this->builder->getClassMetadata()->associationMappings['one'];
 
-        $this->assertFalse($result['isOwningSide'],
-            "HasOne relation is an inversed one-to-one, but resulted in the owning side."
+        $this->assertFalse(
+            $result['isOwningSide'],
+            'HasOne relation is an inversed one-to-one, but resulted in the owning side.'
         );
     }
 
@@ -703,21 +705,21 @@ class BuilderTest extends TestCase
             [
                 'class'  => StubEntityListener::class,
                 'method' => 'swipeFloor',
-            ]
+            ],
         ], $this->fluent->getClassMetadata()->entityListeners['onFlush']);
 
         $this->assertEquals([
             [
                 'class'  => StubEntityListener::class,
                 'method' => 'cleanToilet',
-            ]
+            ],
         ], $this->fluent->getClassMetadata()->entityListeners['postFlush']);
 
         $this->assertEquals([
             [
                 'class'  => StubEntityListener::class,
                 'method' => 'onClear',
-            ]
+            ],
         ], $this->fluent->getClassMetadata()->entityListeners['onClear']);
     }
 
@@ -745,8 +747,10 @@ class BuilderTest extends TestCase
 
         $this->fluent->build();
 
-        $this->assertEquals('target_id',
-            $this->fluent->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]['name']);
+        $this->assertEquals(
+            'target_id',
+            $this->fluent->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]['name']
+        );
         $this->assertEquals('source_id', $this->fluent->getClassMetadata()
                                                       ->getAssociationMapping('manyToOne')['joinColumns'][0]['referencedColumnName']);
     }
@@ -761,8 +765,10 @@ class BuilderTest extends TestCase
 
         $this->fluent->build();
 
-        $this->assertEquals('custom_table_name',
-            $this->fluent->getClassMetadata()->getAssociationMapping('manyToMany')['joinTable']['name']);
+        $this->assertEquals(
+            'custom_table_name',
+            $this->fluent->getClassMetadata()->getAssociationMapping('manyToMany')['joinTable']['name']
+        );
         $this->assertEquals('source_id', $this->fluent->getClassMetadata()
                                                       ->getAssociationMapping('manyToMany')['joinTable']['joinColumns'][0]['name']);
     }
@@ -778,7 +784,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntity');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the oneToOne relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the oneToOne relation. '.$e->getMessage());
         }
     }
 
@@ -793,7 +799,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntity');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the hasOne relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the hasOne relation. '.$e->getMessage());
         }
     }
 
@@ -808,7 +814,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntity');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the belongsTo relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the belongsTo relation. '.$e->getMessage());
         }
     }
 
@@ -823,7 +829,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntities');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the oneToMany relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the oneToMany relation. '.$e->getMessage());
         }
     }
 
@@ -838,7 +844,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntities');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the hasMany relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the hasMany relation. '.$e->getMessage());
         }
     }
 
@@ -853,7 +859,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntities');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the manyToMany relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the manyToMany relation. '.$e->getMessage());
         }
     }
 
@@ -868,7 +874,7 @@ class BuilderTest extends TestCase
         try {
             $this->fluent->getClassMetadata()->getAssociationMapping('fluentEntities');
         } catch (MappingException $e) {
-            $this->fail("Could not find default name for the belongsToMany relation. " . $e->getMessage());
+            $this->fail('Could not find default name for the belongsToMany relation. '.$e->getMessage());
         }
     }
 
@@ -909,5 +915,8 @@ class BuilderTest extends TestCase
 
 class FluentEntity
 {
-    protected $id, $name, $fluentEntity, $fluentEntities;
+    protected $id;
+    protected $name;
+    protected $fluentEntity;
+    protected $fluentEntities;
 }

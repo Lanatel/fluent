@@ -33,13 +33,14 @@ class MaterializedPathTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->classMetadata = new ExtensibleClassMetadata("Foo");
-        $this->builder       = new Builder(new ClassMetadataBuilder($this->classMetadata));
-        $this->tree          = new MaterializedPath($this->builder);
+        $this->classMetadata = new ExtensibleClassMetadata('Foo');
+        $this->builder = new Builder(new ClassMetadataBuilder($this->classMetadata));
+        $this->tree = new MaterializedPath($this->builder);
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState false
      */
     public function test_it_should_enable_field_macros()
@@ -61,11 +62,12 @@ class MaterializedPathTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState false
      */
     public function test_it_gets_along_with_other_tree_field_builders()
     {
-    	Tree::enable();
+        Tree::enable();
 
         $this->builder->tree()->asMaterializedPath();
 
@@ -94,7 +96,6 @@ class MaterializedPathTest extends TestCase
             'activate_locking'           => false,
         ]);
     }
-
 
     public function test_it_lets_me_customize_the_path_field()
     {
@@ -158,14 +159,14 @@ class MaterializedPathTest extends TestCase
 
     public function test_it_returns_a_false_value_for_activate_locking_as_its_not_supported()
     {
-    	$this->tree->build();
+        $this->tree->build();
 
         $this->assertExtensionKeyEquals('activate_locking', false);
     }
 
     public function test_the_path_is_forced_to_nullable()
     {
-    	$this->tree->path('someField')->build();
+        $this->tree->path('someField')->build();
         $this->builder->build();
 
         $this->assertTrue($this->classMetadata->fieldMappings['someField']['nullable']);
@@ -176,8 +177,9 @@ class MaterializedPathTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertExtensionEquals(array $expected)
     {
@@ -190,8 +192,9 @@ class MaterializedPathTest extends TestCase
      * @param string $key
      * @param mixed  $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertExtensionKeyEquals($key, $expected)
     {

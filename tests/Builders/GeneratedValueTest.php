@@ -27,7 +27,7 @@ class GeneratedValueTest extends TestCase
     protected function setUp(): void
     {
         $this->field = $this->getMockBuilder(FieldBuilder::class)->disableOriginalConstructor()->getMock();
-        $this->cm    = $this->getMockBuilder(ClassMetadataInfo::class)->disableOriginalConstructor()->getMock();
+        $this->cm = $this->getMockBuilder(ClassMetadataInfo::class)->disableOriginalConstructor()->getMock();
 
         $this->fluent = new GeneratedValue($this->field, $this->cm);
     }
@@ -81,7 +81,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('AUTO');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', $this->anything(), $this->anything()
+            'crazy_name',
+            $this->anything(),
+            $this->anything()
         );
 
         $this->fluent->auto('crazy_name')->build();
@@ -91,7 +93,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('AUTO');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', $this->anything(), 42
+            'crazy_name',
+            $this->anything(),
+            42
         );
 
         $this->fluent
@@ -103,7 +107,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('AUTO');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', 23, $this->anything()
+            'crazy_name',
+            23,
+            $this->anything()
         );
 
         $this->fluent
@@ -115,7 +121,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('AUTO');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', 23, 42
+            'crazy_name',
+            23,
+            42
         );
 
         $this->fluent
@@ -137,7 +145,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('SEQUENCE');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', $this->anything(), $this->anything()
+            'crazy_name',
+            $this->anything(),
+            $this->anything()
         );
 
         $this->fluent->sequence('crazy_name')->build();
@@ -147,7 +157,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('SEQUENCE');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', $this->anything(), 42
+            'crazy_name',
+            $this->anything(),
+            42
         );
 
         $this->fluent
@@ -159,7 +171,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('SEQUENCE');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', 23, $this->anything()
+            'crazy_name',
+            23,
+            $this->anything()
         );
 
         $this->fluent
@@ -171,7 +185,9 @@ class GeneratedValueTest extends TestCase
     {
         $this->field->expects($this->once())->method('generatedValue')->with('SEQUENCE');
         $this->field->expects($this->once())->method('setSequenceGenerator')->with(
-            'crazy_name', 23, 42
+            'crazy_name',
+            23,
+            42
         );
 
         $this->fluent

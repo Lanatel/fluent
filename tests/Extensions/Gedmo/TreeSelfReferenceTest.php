@@ -28,7 +28,7 @@ class TreeSelfReferenceTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'root';
+        $this->fieldName = 'root';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
         Field::make(new ClassMetadataBuilder($this->classMetadata), 'integer', $this->fieldName)->build();
     }
@@ -40,8 +40,12 @@ class TreeSelfReferenceTest extends TestCase
     {
         TreeSelfReference::enable();
 
-        $field = Field::make(new ClassMetadataBuilder(
-            new ExtensibleClassMetadata('Foo')), 'integer', $this->fieldName
+        $field = Field::make(
+            new ClassMetadataBuilder(
+                new ExtensibleClassMetadata('Foo')
+            ),
+            'integer',
+            $this->fieldName
         )->build();
 
         $this->assertInstanceOf(
@@ -57,8 +61,13 @@ class TreeSelfReferenceTest extends TestCase
     {
         TreeSelfReference::enable();
 
-        $relation = new ManyToOne(new ClassMetadataBuilder(
-            new ExtensibleClassMetadata('Foo')), new DefaultNamingStrategy(), $this->fieldName, 'Foo'
+        $relation = new ManyToOne(
+            new ClassMetadataBuilder(
+                new ExtensibleClassMetadata('Foo')
+            ),
+            new DefaultNamingStrategy(),
+            $this->fieldName,
+            'Foo'
         );
 
         $this->assertInstanceOf(
@@ -148,8 +157,9 @@ class TreeSelfReferenceTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

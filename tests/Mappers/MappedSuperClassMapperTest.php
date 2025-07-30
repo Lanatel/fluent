@@ -20,7 +20,7 @@ class MappedSuperClassMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $mapping      = new StubMappedSuperClassMapping();
+        $mapping = new StubMappedSuperClassMapping();
         $this->mapper = new MappedSuperClassMapper($mapping);
     }
 
@@ -37,7 +37,7 @@ class MappedSuperClassMapperTest extends TestCase
     public function test_it_should_delegate_the_proper_mapping_to_the_mapping_class()
     {
         $metadata = new ClassMetadataInfo(StubMappedSuperClass::class);
-        $builder  = new Builder(new ClassMetadataBuilder($metadata));
+        $builder = new Builder(new ClassMetadataBuilder($metadata));
 
         $this->mapper->map($builder);
 

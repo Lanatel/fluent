@@ -15,7 +15,10 @@ use Tests\Relations\Traits\Primary;
 
 class ManyToOneTest extends RelationTestCase
 {
-    use Owning, Primary, IsMacroable, MockeryPHPUnitIntegration;
+    use Owning;
+    use Primary;
+    use IsMacroable;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var ManyToOne

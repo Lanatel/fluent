@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Mapping\MappingException;
+use Doctrine\Persistence\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\EntityMapping;
 use LaravelDoctrine\Fluent\Fluent;
@@ -25,9 +25,9 @@ class FluentDriverTest extends TestCase
 {
     public function test_it_should_load_metadata_for_entities_that_were_added_to_it()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new FakeClassMapping);
+        $driver->addMapping(new FakeClassMapping());
         $driver->loadMetadataForClass(
             FakeEntity::class,
             new ClassMetadataInfo(FakeEntity::class)
@@ -41,9 +41,9 @@ class FluentDriverTest extends TestCase
 
     public function test_it_should_load_metadata_for_embeddables_that_were_added_to_it()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new StubEmbeddableMapping);
+        $driver->addMapping(new StubEmbeddableMapping());
         $driver->loadMetadataForClass(
             StubEmbeddable::class,
             new ClassMetadataInfo(StubEmbeddable::class)
@@ -57,9 +57,9 @@ class FluentDriverTest extends TestCase
 
     public function test_it_should_load_metadata_for_mapped_super_classes_that_were_added_to_it()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new StubMappedSuperClassMapping);
+        $driver->addMapping(new StubMappedSuperClassMapping());
         $driver->loadMetadataForClass(
             StubMappedSuperClass::class,
             new ClassMetadataInfo(StubMappedSuperClass::class)
@@ -76,7 +76,7 @@ class FluentDriverTest extends TestCase
         $driver = new FluentDriver([
             StubEntityMapping::class,
             StubEmbeddableMapping::class,
-            StubMappedSuperClassMapping::class
+            StubMappedSuperClassMapping::class,
         ]);
 
         $driver->loadMetadataForClass(
@@ -109,11 +109,11 @@ class FluentDriverTest extends TestCase
 
     public function test_can_add_array_of_new_mappings()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
         $driver->addMappings([
             FakeClassMapping::class,
-            StubEntityMapping::class
+            StubEntityMapping::class,
         ]);
 
         $this->assertContains(
@@ -132,10 +132,10 @@ class FluentDriverTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Mapping class [Tests\DoesnExist] does not exist');
 
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
         $driver->addMappings([
-            DoesnExist::class
+            DoesnExist::class,
         ]);
     }
 
@@ -144,19 +144,19 @@ class FluentDriverTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Mapping class [Tests\Stubs\Entities\StubEntity] should implement LaravelDoctrine\Fluent\Mapping');
 
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
         $driver->addMappings([
-            StubEntity::class
+            StubEntity::class,
         ]);
     }
 
     public function test_it_should_return_all_class_names_of_loaded_entities()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new FakeClassMapping);
-        $driver->addMapping(new StubEntityMapping);
+        $driver->addMapping(new FakeClassMapping());
+        $driver->addMapping(new StubEntityMapping());
 
         $this->assertContains(
             FakeEntity::class,
@@ -171,34 +171,34 @@ class FluentDriverTest extends TestCase
 
     public function test_entities_should_not_be_transient()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new FakeClassMapping);
+        $driver->addMapping(new FakeClassMapping());
 
         $this->assertFalse($driver->isTransient(FakeEntity::class));
     }
 
     public function test_embeddables_should_be_transient()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new StubEmbeddableMapping);
+        $driver->addMapping(new StubEmbeddableMapping());
 
         $this->assertTrue($driver->isTransient(StubEmbeddable::class));
     }
 
     public function test_mapped_super_classes_should_not_be_transient()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
-        $driver->addMapping(new StubMappedSuperClassMapping);
+        $driver->addMapping(new StubMappedSuperClassMapping());
 
         $this->assertFalse($driver->isTransient(StubMappedSuperClass::class));
     }
 
     public function test_unmapped_classes_should_be_transient()
     {
-        $driver = new FluentDriver;
+        $driver = new FluentDriver();
 
         $this->assertTrue($driver->isTransient(StubMappedSuperClass::class));
     }
@@ -248,7 +248,8 @@ class FakeClassMapping extends EntityMapping
 
 class FakeEntity
 {
-    protected $id, $name;
+    protected $id;
+    protected $name;
 }
 
 class CustomBuilder extends Builder

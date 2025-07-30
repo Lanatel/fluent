@@ -70,7 +70,7 @@ class InheritanceTestCase extends TestCase
         $this->inheritance->map([
             'stub1'  => StubEntity::class,
             'stub2'  => StubEntity2::class,
-            'stub3'  => StubEntity3::class
+            'stub3'  => StubEntity3::class,
         ]);
 
         $map = $this->builder->getClassMetadata()->discriminatorMap;

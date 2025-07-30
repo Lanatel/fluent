@@ -39,9 +39,9 @@ class LocaleTest extends TestCase
     {
         Locale::enable();
 
-        $this->fieldName     = 'locale';
+        $this->fieldName = 'locale';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->builder       = new Builder(new ClassMetadataBuilder($this->classMetadata));
+        $this->builder = new Builder(new ClassMetadataBuilder($this->classMetadata));
 
         $this->extension = new Locale($this->classMetadata, $this->fieldName);
     }
@@ -81,14 +81,14 @@ class LocaleTest extends TestCase
         $this->builder->build();
     }
 
-
     /**
      * Assert that the resulting build matches exactly with the given array.
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

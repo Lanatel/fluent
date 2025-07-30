@@ -32,7 +32,7 @@ class TreePathTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'path';
+        $this->fieldName = 'path';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
         Field::make(new ClassMetadataBuilder($this->classMetadata), 'integer', $this->fieldName)->build();
 
@@ -43,8 +43,12 @@ class TreePathTest extends TestCase
     {
         TreePath::enable();
 
-        $field = Field::make(new ClassMetadataBuilder(
-            new ExtensibleClassMetadata('Foo')), 'integer', $this->fieldName
+        $field = Field::make(
+            new ClassMetadataBuilder(
+                new ExtensibleClassMetadata('Foo')
+            ),
+            'integer',
+            $this->fieldName
         )->build();
 
         $this->assertInstanceOf(
@@ -92,7 +96,6 @@ class TreePathTest extends TestCase
         $this->getExtension()
              ->separator('|||')
              ->build();
-
     }
 
     /**
@@ -100,8 +103,9 @@ class TreePathTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

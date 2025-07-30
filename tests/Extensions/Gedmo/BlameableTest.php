@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -14,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class BlameableTest extends TestCase
 {
     use TrackingExtensions;
-    
+
     /**
      * @var Blameable
      */
@@ -23,38 +24,38 @@ class BlameableTest extends TestCase
     protected function setUp(): void
     {
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->extension     = new Blameable($this->classMetadata, $this->fieldName);
+        $this->extension = new Blameable($this->classMetadata, $this->fieldName);
     }
-    
+
     public function test_it_should_add_itself_as_a_field_macro()
     {
-    	Blameable::enable();
-        
+        Blameable::enable();
+
         $field = Field::make(new ClassMetadataBuilder(new ExtensibleClassMetadata('Foo')), 'string', $this->fieldName);
-        
+
         $this->assertInstanceOf(
-            Blameable::class, 
+            Blameable::class,
             call_user_func([$field, Blameable::MACRO_METHOD])
         );
     }
-    
+
     public function test_it_should_add_itself_as_a_many_to_one_macro()
     {
-    	Blameable::enable();
-        
+        Blameable::enable();
+
         $manyToOne = new ManyToOne(
             new ClassMetadataBuilder(new ExtensibleClassMetadata('Foo')),
             new DefaultNamingStrategy(),
             $this->fieldName,
             'Bar'
         );
-        
+
         $this->assertInstanceOf(
-            Blameable::class, 
+            Blameable::class,
             call_user_func([$manyToOne, Blameable::MACRO_METHOD])
         );
     }
-    
+
     /**
      * @return AbstractTrackingExtension
      */

@@ -36,6 +36,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @param Fluent $builder
+     *
      * @return TreeStrategy
      */
     abstract protected function getStrategy(Fluent $builder);
@@ -46,8 +47,8 @@ abstract class TreeStrategyTest extends TestCase
     protected function bootStrategy()
     {
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->builder       = new Builder(new ClassMetadataBuilder($this->classMetadata));
-        $this->strategy      = $this->getStrategy($this->builder);
+        $this->builder = new Builder(new ClassMetadataBuilder($this->classMetadata));
+        $this->strategy = $this->getStrategy($this->builder);
     }
 
     public function test_it_should_create_a_belongs_to_relation_to_the_parent_class_on_the_given_field()
@@ -62,6 +63,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @param string $fieldName
+     *
      * @dataProvider getAllFields
      */
     public function test_can_set_a_custom_field($fieldName)
@@ -73,6 +75,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @param string $fieldName
+     *
      * @dataProvider getNumericFields
      */
     public function test_can_set_a_custom_field_as_integer($fieldName)
@@ -84,6 +87,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @param string $fieldName
+     *
      * @dataProvider getNumericFields
      */
     public function test_can_set_a_custom_field_as_big_int($fieldName)
@@ -95,6 +99,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @param string $fieldName
+     *
      * @dataProvider getNumericFields
      */
     public function test_can_set_a_custom_field_as_small_int($fieldName)
@@ -116,6 +121,7 @@ abstract class TreeStrategyTest extends TestCase
 
     /**
      * @dataProvider getNumericFields
+     *
      * @param string $fieldName
      */
     public function test_it_allows_further_field_configuration_through_a_callback($fieldName)
@@ -123,7 +129,7 @@ abstract class TreeStrategyTest extends TestCase
         $mock = \Mockery::mock(['callMe' => true]);
         $mock->shouldReceive('callMe')->once();
 
-        $this->strategy->$fieldName('custom', 'integer', function($field) use ($mock) {
+        $this->strategy->$fieldName('custom', 'integer', function ($field) use ($mock) {
             $this->assertInstanceOf(Field::class, $field);
             $mock->callMe();
         });
@@ -137,7 +143,7 @@ abstract class TreeStrategyTest extends TestCase
         $mock = \Mockery::mock(['callMe' => true]);
         $mock->shouldReceive('callMe')->once();
 
-        $this->strategy->$relation('myself', function($belongsTo) use ($mock) {
+        $this->strategy->$relation('myself', function ($belongsTo) use ($mock) {
             $this->assertInstanceOf(ManyToOne::class, $belongsTo);
             $mock->callMe();
         });
@@ -145,11 +151,10 @@ abstract class TreeStrategyTest extends TestCase
 
     public function test_it_always_maps_the_parent_self_reference_relation()
     {
-    	$this->strategy->build();
+        $this->strategy->build();
 
         $this->assertExtensionKeyEquals('parent', 'parent');
     }
-
 
     public function getNumericFields()
     {
@@ -173,8 +178,9 @@ abstract class TreeStrategyTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertExtensionEquals(array $expected)
     {
@@ -185,10 +191,11 @@ abstract class TreeStrategyTest extends TestCase
      * Assert that a given key of the built extension matches the expected value.
      *
      * @param string $key
-     * @param mixed $expected
+     * @param mixed  $expected
+     *
+     * @throws \PHPUnit_Framework_ExpectationFailedException
      *
      * @return void
-     * @throws \PHPUnit_Framework_ExpectationFailedException
      */
     protected function assertExtensionKeyEquals($key, $expected)
     {

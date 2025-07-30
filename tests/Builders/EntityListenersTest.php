@@ -50,14 +50,15 @@ class EntityListenersTest extends TestCase
         );
 
         $this->assertCount(
-            1, $this->fluent->getClassMetadata()->entityListeners[$event]
+            1,
+            $this->fluent->getClassMetadata()->entityListeners[$event]
         );
 
         $this->assertEquals([
             [
                 'class'  => $listener,
-                'method' => $expectedMethod
-            ]
+                'method' => $expectedMethod,
+            ],
         ], $this->fluent->getClassMetadata()->entityListeners[$event]);
     }
 
@@ -74,18 +75,19 @@ class EntityListenersTest extends TestCase
         );
 
         $this->assertCount(
-            2, $this->fluent->getClassMetadata()->entityListeners['onClear']
+            2,
+            $this->fluent->getClassMetadata()->entityListeners['onClear']
         );
 
         $this->assertEquals([
             [
                 'class'  => StubEntityListener::class,
-                'method' => 'onClear'
+                'method' => 'onClear',
             ],
             [
                 'class'  => StubEntityListener::class,
-                'method' => 'handle'
-            ]
+                'method' => 'handle',
+            ],
         ], $this->fluent->getClassMetadata()->entityListeners['onClear']);
     }
 

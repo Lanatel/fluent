@@ -23,6 +23,7 @@ class NestedSetTest extends TreeStrategyTest
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState false
      */
     public function test_building_a_nested_tree_through_the_tree_facade()

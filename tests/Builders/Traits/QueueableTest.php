@@ -80,11 +80,11 @@ class QueueableTest extends TestCase
         $mock = \Mockery::mock(Buildable::class);
         $mock->shouldReceive('build')->once();
 
-        QueueableClass::macro('firstLevel', function() use ($mock) {
+        QueueableClass::macro('firstLevel', function () use ($mock) {
             return $mock;
         });
 
-        QueueableClass::macro('inception', function(QueueableClass $builder){
+        QueueableClass::macro('inception', function (QueueableClass $builder) {
             return $builder->firstLevel();
         });
 
@@ -95,7 +95,9 @@ class QueueableTest extends TestCase
 
 class QueueableClass
 {
-    use Queueable, Macroable, QueuesMacros;
+    use Queueable;
+    use Macroable;
+    use QueuesMacros;
 
     public function addToQueue(Buildable $buildable)
     {

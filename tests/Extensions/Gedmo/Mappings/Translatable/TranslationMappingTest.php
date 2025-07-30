@@ -27,18 +27,18 @@ class TranslationMappingTest extends MappingTestCase
         /** @var Entity|\Mockery\Mock $entity */
         $entity = \Mockery::mock(Entity::class);
         $entity->shouldReceive('setRepositoryClass')->with(TranslationRepository::class)->once()->andReturnSelf();
-        
+
         /** @var Index|\Mockery\Mock $index */
         $index = \Mockery::mock(Index::class);
         $index->shouldReceive('name')->with('translations_lookup_idx')->once()->andReturnSelf();
-        
+
         /** @var UniqueConstraint|\Mockery\Mock $unique */
         $unique = \Mockery::mock(UniqueConstraint::class);
         $unique->shouldReceive('name')->with('lookup_unique_idx')->once()->andReturnSelf();
-        
+
         $this->builder->shouldReceive('table')->with('ext_translations')->once()->andReturnSelf();
         $this->builder->shouldReceive('entity')->once()->andReturn($entity);
-        $this->builder->shouldReceive('index')->with(["locale", "object_class", "foreign_key"])->once()->andReturn($index);
-        $this->builder->shouldReceive('unique')->with(["locale", "object_class", "field", "foreign_key"])->once()->andReturn($unique);
+        $this->builder->shouldReceive('index')->with(['locale', 'object_class', 'foreign_key'])->once()->andReturn($index);
+        $this->builder->shouldReceive('unique')->with(['locale', 'object_class', 'field', 'foreign_key'])->once()->andReturn($unique);
     }
 }

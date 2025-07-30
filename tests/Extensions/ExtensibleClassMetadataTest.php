@@ -1,8 +1,9 @@
 <?php
+
 namespace Tests\Extensions;
 
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadata as ClassMetadataImplementation;
+use Doctrine\Persistence\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +16,7 @@ class ExtensibleClassMetadataTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->cm = new ExtensibleClassMetadata("Foo");
+        $this->cm = new ExtensibleClassMetadata('Foo');
     }
 
     public function test_it_should_be_a_doctrine_class_metadata()
@@ -26,8 +27,8 @@ class ExtensibleClassMetadataTest extends TestCase
 
     public function test_it_should_hold_extension_information()
     {
-    	$this->cm->addExtension('foo', [
-            'bar' => 'baz'
+        $this->cm->addExtension('foo', [
+            'bar' => 'baz',
         ]);
 
         $this->assertNotEmpty($this->cm->extensions);
@@ -36,14 +37,14 @@ class ExtensibleClassMetadataTest extends TestCase
 
     public function test_it_can_merge_and_overwrite_existing_extension()
     {
-    	$this->cm->addExtension('foo', [
+        $this->cm->addExtension('foo', [
             'foo' => 'foo',
             'bar' => 'bar',
         ]);
 
         $this->cm->mergeExtension('foo', [
             'bar' => 'baz',
-            'baz' => 'baz'
+            'baz' => 'baz',
         ]);
 
         $this->assertEquals([
@@ -55,14 +56,14 @@ class ExtensibleClassMetadataTest extends TestCase
 
     public function test_it_can_merge_and_append_to_existing_extension()
     {
-    	$this->cm->addExtension('foo', [
+        $this->cm->addExtension('foo', [
             'foo' => 'foo',
             'bar' => 'bar',
         ]);
 
         $this->cm->appendExtension('foo', [
             'bar' => 'baz',
-            'baz' => 'baz'
+            'baz' => 'baz',
         ]);
 
         $this->assertEquals([

@@ -68,7 +68,7 @@ class RelationTestCase extends TestCase
 
         $cache = $this->getAssocValue($this->field, 'cache');
         $this->assertEquals(1, $cache['usage']);
-        $this->assertEquals('tests_relations_fluententity__' . $this->field, $cache['region']);
+        $this->assertEquals('tests_relations_fluententity__'.$this->field, $cache['region']);
     }
 
     public function test_can_cache_the_association_with_usage()
@@ -79,7 +79,7 @@ class RelationTestCase extends TestCase
 
         $cache = $this->getAssocValue($this->field, 'cache');
         $this->assertEquals(3, $cache['usage']);
-        $this->assertEquals('tests_relations_fluententity__' . $this->field, $cache['region']);
+        $this->assertEquals('tests_relations_fluententity__'.$this->field, $cache['region']);
     }
 
     public function test_valid_cache_usage_should_be_given()
@@ -126,5 +126,6 @@ class RelationTestCase extends TestCase
 
 class FluentEntity
 {
-    protected $parent, $children;
+    protected $parent;
+    protected $children;
 }

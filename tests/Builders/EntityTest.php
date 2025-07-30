@@ -12,7 +12,8 @@ use Tests\Stubs\Entities\StubEntity;
 
 class EntityTest extends TestCase
 {
-    use IsMacroable, MockeryPHPUnitIntegration;
+    use IsMacroable;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var ClassMetadataBuilder
@@ -27,7 +28,7 @@ class EntityTest extends TestCase
     protected function setUp(): void
     {
         $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
-        $this->entity  = new Entity($this->builder);
+        $this->entity = new Entity($this->builder);
     }
 
     public function test_can_set_repository_class()

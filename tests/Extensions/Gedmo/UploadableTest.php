@@ -2,10 +2,10 @@
 
 namespace Tests\Extensions\Gedmo;
 
-use Doctrine\Persistence\Mapping\RuntimeReflectionService;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
+use Doctrine\Persistence\Mapping\RuntimeReflectionService;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Uploadable\FilenameGenerator\FilenameGeneratorInterface;
 use Gedmo\Uploadable\Mapping\Driver\Fluent;
@@ -42,7 +42,7 @@ class UploadableTest extends TestCase
     {
         Uploadable::enable();
 
-        $builder = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $builder = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
 
         $this->assertInstanceOf(
             Uploadable::class,
@@ -54,7 +54,7 @@ class UploadableTest extends TestCase
     {
         Uploadable::enable();
 
-        $builder = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $builder = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
 
         $builder->uploadable();
         $builder->string('fooes')->asFileName();
@@ -208,7 +208,7 @@ class UploadableTest extends TestCase
     {
         $this->expectException(InvalidMappingException::class);
 
-    	$this->workingBuilder()->allow('jpg')->disallow('doc')->build();
+        $this->workingBuilder()->allow('jpg')->disallow('doc')->build();
     }
 
     public function test_it_needs_a_field_set_up_as_path_or_name()
@@ -248,7 +248,7 @@ class UploadableTest extends TestCase
 
         Uploadable::enable();
 
-        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
         $fluent->uploadable();
         $fluent->field($type, 'bar')->asFilePath();
         $fluent->build();
@@ -263,7 +263,7 @@ class UploadableTest extends TestCase
 
         Uploadable::enable();
 
-        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
         $fluent->uploadable();
         $fluent->field($type, 'bar')->asFileName();
         $fluent->build();
@@ -278,7 +278,7 @@ class UploadableTest extends TestCase
 
         Uploadable::enable();
 
-        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
         $fluent->uploadable();
         $fluent->field($type, 'bar')->asFileMimeType();
         $fluent->build();
@@ -293,7 +293,7 @@ class UploadableTest extends TestCase
 
         Uploadable::enable();
 
-        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
+        $fluent = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
         $fluent->uploadable();
         $fluent->field($type, 'bar')->asFileSize();
         $fluent->build();
@@ -323,7 +323,7 @@ class UploadableTest extends TestCase
             'filePathField'     => false,
             'fileSizeField'     => false,
             'filenameGenerator' => Validator::FILENAME_GENERATOR_NONE,
-            'maxSize'           => (double)0,
+            'maxSize'           => (float) 0,
             'allowedTypes'      => false,
             'disallowedTypes'   => false,
         ], $overrides);
@@ -356,7 +356,7 @@ class UploadableTest extends TestCase
         $types = Type::getTypesMap();
         unset($types[$type]);
 
-        return array_map(function($type){
+        return array_map(function ($type) {
             return [$type];
         }, array_keys($types));
     }

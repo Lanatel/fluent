@@ -20,7 +20,7 @@ class EntityMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $mapping      = new StubEntityMapping;
+        $mapping = new StubEntityMapping();
         $this->mapper = new EntityMapper($mapping);
     }
 
@@ -37,7 +37,7 @@ class EntityMapperTest extends TestCase
     public function test_it_should_delegate_the_proper_mapping_to_the_mapping_class()
     {
         $metadata = new ClassMetadataInfo(StubEntity::class);
-        $builder  = new Builder(new ClassMetadataBuilder($metadata));
+        $builder = new Builder(new ClassMetadataBuilder($metadata));
 
         $this->mapper->map($builder);
 
