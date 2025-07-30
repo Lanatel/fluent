@@ -17,7 +17,8 @@ use Tests\Stubs\Entities\StubEntity;
 
 class FieldTest extends TestCase
 {
-    use IsMacroable, MockeryPHPUnitIntegration;
+    use IsMacroable;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var ClassMetadataBuilder
@@ -160,8 +161,10 @@ class FieldTest extends TestCase
 
         $this->field->build();
 
-        $this->assertEquals('default',
-            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['default']);
+        $this->assertEquals(
+            'default',
+            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['default']
+        );
     }
 
     public function test_can_set_fixed()
@@ -179,8 +182,10 @@ class FieldTest extends TestCase
 
         $this->field->build();
 
-        $this->assertEquals('comment',
-            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['comment']);
+        $this->assertEquals(
+            'comment',
+            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['comment']
+        );
     }
 
     public function test_can_set_collation()
@@ -189,8 +194,10 @@ class FieldTest extends TestCase
 
         $this->field->build();
 
-        $this->assertEquals('collation',
-            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['collation']);
+        $this->assertEquals(
+            'collation',
+            $this->builder->getClassMetadata()->getFieldMapping('name')['options']['collation']
+        );
     }
 
     public function test_can_make_field_primary()
@@ -217,97 +224,97 @@ class FieldTest extends TestCase
 
     public function test_integer_can_be_used_for_versioning()
     {
-        $this->doTestValidTypeForVersioning("integer");
+        $this->doTestValidTypeForVersioning('integer');
     }
 
     public function test_bigint_can_be_used_for_versioning()
     {
-        $this->doTestValidTypeForVersioning("bigint");
+        $this->doTestValidTypeForVersioning('bigint');
     }
 
     public function test_smallint_can_be_used_for_versioning()
     {
-        $this->doTestValidTypeForVersioning("smallint");
+        $this->doTestValidTypeForVersioning('smallint');
     }
 
     public function test_datetime_can_be_used_for_versioning()
     {
-        $this->doTestValidTypeForVersioning("datetime");
+        $this->doTestValidTypeForVersioning('datetime');
     }
 
     public function test_array_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("array");
+        $this->doTestInvalidTypeForVersioning('array');
     }
 
     public function test_simple_array_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("simple_array");
+        $this->doTestInvalidTypeForVersioning('simple_array');
     }
 
     public function test_json_array_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("json");
+        $this->doTestInvalidTypeForVersioning('json');
     }
 
     public function test_boolean_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("boolean");
+        $this->doTestInvalidTypeForVersioning('boolean');
     }
 
     public function test_datetimetz_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("datetimetz");
+        $this->doTestInvalidTypeForVersioning('datetimetz');
     }
 
     public function test_date_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("date");
+        $this->doTestInvalidTypeForVersioning('date');
     }
 
     public function test_time_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("time");
+        $this->doTestInvalidTypeForVersioning('time');
     }
 
     public function test_decimal_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("decimal");
+        $this->doTestInvalidTypeForVersioning('decimal');
     }
 
     public function test_object_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("object");
+        $this->doTestInvalidTypeForVersioning('object');
     }
 
     public function test_string_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("string");
+        $this->doTestInvalidTypeForVersioning('string');
     }
 
     public function test_text_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("text");
+        $this->doTestInvalidTypeForVersioning('text');
     }
 
     public function test_binary_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("binary");
+        $this->doTestInvalidTypeForVersioning('binary');
     }
 
     public function test_blob_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("blob");
+        $this->doTestInvalidTypeForVersioning('blob');
     }
 
     public function test_float_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("float");
+        $this->doTestInvalidTypeForVersioning('float');
     }
 
     public function test_guid_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning("guid");
+        $this->doTestInvalidTypeForVersioning('guid');
     }
 
     public function test_ids_cannot_be_used_for_versioning()
@@ -327,7 +334,7 @@ class FieldTest extends TestCase
 
     public function test_buildable_objects_returned_from_macros_get_queued_and_built()
     {
-        Field::macro('foo', function(){
+        Field::macro('foo', function () {
             /** @var Buildable|\Mockery\Mock $buildable */
             $buildable = \Mockery::mock(Buildable::class);
             $buildable->shouldReceive('build')->once();
@@ -342,7 +349,7 @@ class FieldTest extends TestCase
     private function doTestValidTypeForVersioning($type)
     {
         $builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
-        $field   = Field::make($builder, $type, "{$type}Field");
+        $field = Field::make($builder, $type, "{$type}Field");
 
         $field->useForVersioning()->build();
 
@@ -354,7 +361,7 @@ class FieldTest extends TestCase
     private function doTestInvalidTypeForVersioning($type)
     {
         $builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
-        $field   = Field::make($builder, $type, "aField");
+        $field = Field::make($builder, $type, 'aField');
 
         $this->expectException(MappingException::class);
         $field->useForVersioning()->build();

@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Gedmo\Exception\InvalidMappingException;
@@ -20,17 +21,16 @@ trait TrackingExtensions
      */
     protected $classMetadata;
 
-
     /**
      * @return AbstractTrackingExtension
      */
     abstract protected function getExtension();
-    
+
     /**
      * @return string
      */
     abstract protected function getExtensionName();
-    
+
     public function test_it_should_fail_without_binding_which_event_to_use()
     {
         $this->expectException(InvalidMappingException::class);
@@ -132,8 +132,9 @@ trait TrackingExtensions
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -12,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class IpTraceableTest extends TestCase
 {
     use TrackingExtensions;
-    
+
     /**
      * @var IpTraceable
      */
@@ -20,11 +21,11 @@ class IpTraceableTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'ip';
+        $this->fieldName = 'ip';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->extension     = new IpTraceable($this->classMetadata, $this->fieldName);
+        $this->extension = new IpTraceable($this->classMetadata, $this->fieldName);
     }
-    
+
     public function test_it_should_add_itself_as_a_field_macro()
     {
         IpTraceable::enable();
@@ -36,7 +37,6 @@ class IpTraceableTest extends TestCase
             call_user_func([$field, IpTraceable::MACRO_METHOD])
         );
     }
-    
 
     /**
      * @return AbstractTrackingExtension

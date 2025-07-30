@@ -32,7 +32,7 @@ class VersionedTest extends TestCase
     protected function setUp(): void
     {
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->fieldName     = 'someField';
+        $this->fieldName = 'someField';
 
         $this->builder = new Versioned($this->classMetadata, $this->fieldName);
     }
@@ -60,7 +60,6 @@ class VersionedTest extends TestCase
             'SomeEntity'
         );
 
-
         $relation->versioned();
         $relation->build();
 
@@ -77,7 +76,6 @@ class VersionedTest extends TestCase
             'someRelation',
             'SomeEntity'
         );
-
 
         $relation->versioned();
         $relation->build();

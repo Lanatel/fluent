@@ -64,7 +64,7 @@ class AttributeOverrideTest extends TestCase
     public function test_default_settings_should_be_kept()
     {
         $this->builder->addField('nullable_attribute', 'string', [
-            'nullable' => true
+            'nullable' => true,
         ]);
 
         $override = $this->override('nullable_attribute', function ($field) {
@@ -80,7 +80,7 @@ class AttributeOverrideTest extends TestCase
     public function test_can_override_settings()
     {
         $this->builder->addField('nullable_attribute', 'string', [
-            'nullable' => true
+            'nullable' => true,
         ]);
 
         $override = $this->override('nullable_attribute', function ($field) {
@@ -97,8 +97,8 @@ class AttributeOverrideTest extends TestCase
     {
         $this->builder->addField('nullable_attribute', 'string', [
             'options' => [
-                'default' => 'some_default'
-            ]
+                'default' => 'some_default',
+            ],
         ]);
 
         $override = $this->override('nullable_attribute', function ($field) {

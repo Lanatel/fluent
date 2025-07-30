@@ -23,25 +23,25 @@ class TableTest extends TestCase
     protected function setUp(): void
     {
         $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
-        $this->table   = new Table($this->builder);
+        $this->table = new Table($this->builder);
     }
 
     public function test_can_be_constructed_with_a_name_string()
     {
-    	new Table($this->builder, 'users');
+        new Table($this->builder, 'users');
 
         $this->assertEquals('users', $this->builder->getClassMetadata()->getTableName());
     }
 
     public function test_it_ignores_empty_names()
     {
-    	$this->assertNull($this->builder->getClassMetadata()->table);
+        $this->assertNull($this->builder->getClassMetadata()->table);
     }
 
     public function test_it_can_be_constructed_with_a_callback_instead_of_a_name()
     {
-    	new Table($this->builder, function(Table $builder){
-             $builder->setName('crazy_logic');
+        new Table($this->builder, function (Table $builder) {
+            $builder->setName('crazy_logic');
         });
 
         $this->assertEquals('crazy_logic', $this->builder->getClassMetadata()->getTableName());
@@ -74,18 +74,19 @@ class TableTest extends TestCase
     {
         $this->table->options([
             'collate' => 'utf8mb4_unicode_ci',
-            'charset' => 'utf8mb4'
+            'charset' => 'utf8mb4',
         ]);
 
         $this->table->build();
 
         $this->assertEquals([
             'collate' => 'utf8mb4_unicode_ci',
-            'charset' => 'utf8mb4'
+            'charset' => 'utf8mb4',
         ], $this->builder->getClassMetadata()->table['options']);
     }
 
-    public function test_set_options_does_not_touch_other_data() {
+    public function test_set_options_does_not_touch_other_data()
+    {
         $table = $this->table->getClassMetadata()->table;
 
         $this->table->options(['collate' => 'utf8mb4_unicode_ci']);
@@ -96,7 +97,8 @@ class TableTest extends TestCase
         $this->assertEquals($table, $this->builder->getClassMetadata()->table);
     }
 
-    public function test_can_set_options_and_change_schema () {
+    public function test_can_set_options_and_change_schema()
+    {
         $this->table->options(['collate' => 'utf8mb4_unicode_ci']);
         $this->table->schema('a_schema');
 
@@ -106,7 +108,8 @@ class TableTest extends TestCase
         $this->assertEquals(['collate' => 'utf8mb4_unicode_ci'], $this->builder->getClassMetadata()->table['options']);
     }
 
-    public function test_can_set_charset() {
+    public function test_can_set_charset()
+    {
         $this->table->charset('utf8mb4');
 
         $this->table->build();
@@ -114,7 +117,8 @@ class TableTest extends TestCase
         $this->assertEquals('utf8mb4', $this->builder->getClassMetadata()->table['options']['charset']);
     }
 
-    public function test_can_set_collate() {
+    public function test_can_set_collate()
+    {
         $this->table->collate('utf8mb4_unicode_ci');
 
         $this->table->build();
@@ -122,7 +126,8 @@ class TableTest extends TestCase
         $this->assertEquals('utf8mb4_unicode_ci', $this->builder->getClassMetadata()->table['options']['collate']);
     }
 
-    public function test_can_chain_collate_charset_schema() {
+    public function test_can_chain_collate_charset_schema()
+    {
         $this->table->collate('utf8mb4_unicode_ci')->charset('utf8mb4')->schema('a_schema');
 
         $this->table->build();
@@ -130,7 +135,7 @@ class TableTest extends TestCase
         $this->assertEquals('a_schema', $this->builder->getClassMetadata()->table['schema']);
         $this->assertEquals([
             'collate' => 'utf8mb4_unicode_ci',
-            'charset' => 'utf8mb4'
+            'charset' => 'utf8mb4',
         ], $this->builder->getClassMetadata()->table['options']);
     }
 }

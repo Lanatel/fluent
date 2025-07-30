@@ -20,7 +20,7 @@ class EmbeddableMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $mapping      = new StubEmbeddableMapping();
+        $mapping = new StubEmbeddableMapping();
         $this->mapper = new EmbeddableMapper($mapping);
     }
 
@@ -37,7 +37,7 @@ class EmbeddableMapperTest extends TestCase
     public function test_it_should_delegate_the_proper_mapping_to_the_mapping_class()
     {
         $metadata = new ClassMetadataInfo(StubEmbeddable::class);
-        $builder  = new Builder(new ClassMetadataBuilder($metadata));
+        $builder = new Builder(new ClassMetadataBuilder($metadata));
 
         $this->mapper->map($builder);
 

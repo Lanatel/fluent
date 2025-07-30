@@ -15,7 +15,11 @@ use Tests\Relations\Traits\Ownable;
 
 class OneToManyTest extends RelationTestCase
 {
-    use OneTo, Indexable, Orderable, Ownable, NonPrimary;
+    use OneTo;
+    use Indexable;
+    use Orderable;
+    use Ownable;
+    use NonPrimary;
 
     /**
      * @var OneToMany

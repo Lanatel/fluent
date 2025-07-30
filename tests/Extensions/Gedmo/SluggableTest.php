@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -69,7 +70,7 @@ class SluggableTest extends TestCase
 
     public function test_it_queues_when_used_as_field_macro_so_that_the_field_gets_built_before_the_extension()
     {
-    	Sluggable::enable();
+        Sluggable::enable();
 
         $builder = new Builder($this->classMetadataBuilder);
 
@@ -89,7 +90,7 @@ class SluggableTest extends TestCase
             'unique_base' => null,
             'separator'   => '-',
             'prefix'      => '',
-            'suffix'      => ''
+            'suffix'      => '',
         ]);
     }
 
@@ -109,7 +110,7 @@ class SluggableTest extends TestCase
             'unique_base' => null,
             'separator'   => '-',
             'prefix'      => '',
-            'suffix'      => ''
+            'suffix'      => '',
         ]);
     }
 
@@ -141,7 +142,7 @@ class SluggableTest extends TestCase
             'unique_base' => 'base',
             'separator'   => '_',
             'prefix'      => 'prefix-',
-            'suffix'      => '-suffix'
+            'suffix'      => '-suffix',
         ]);
     }
 
@@ -163,15 +164,16 @@ class SluggableTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {
         $this->assertEquals([
             'slugs' => [
-                $this->fieldName => $expected
-            ]
+                $this->fieldName => $expected,
+            ],
         ], $this->classMetadata->getExtension(
             $this->getExtensionName()
         ));

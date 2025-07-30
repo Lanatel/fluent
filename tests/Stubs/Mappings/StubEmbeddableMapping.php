@@ -20,6 +20,7 @@ class StubEmbeddableMapping extends EmbeddableMapping
 
     /**
      * Returns the fully qualified name of the entity that this mapper maps.
+     *
      * @return string
      */
     public function mapFor()

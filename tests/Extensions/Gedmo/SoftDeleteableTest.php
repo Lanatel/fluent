@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -31,9 +32,9 @@ class SoftDeleteableTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'deletedAt';
+        $this->fieldName = 'deletedAt';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->extension     = new SoftDeleteable($this->classMetadata, $this->fieldName);
+        $this->extension = new SoftDeleteable($this->classMetadata, $this->fieldName);
     }
 
     public function test_it_should_add_itself_as_a_field_macro()
@@ -67,7 +68,7 @@ class SoftDeleteableTest extends TestCase
         $this->assertBuildResultIs([
             'softDeleteable' => true,
             'fieldName'      => $this->fieldName,
-            'timeAware'      => false
+            'timeAware'      => false,
         ]);
     }
 
@@ -78,7 +79,7 @@ class SoftDeleteableTest extends TestCase
         $this->assertBuildResultIs([
             'softDeleteable' => true,
             'fieldName'      => $this->fieldName,
-            'timeAware'      => true
+            'timeAware'      => true,
         ]);
     }
 
@@ -87,8 +88,9 @@ class SoftDeleteableTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

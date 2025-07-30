@@ -16,7 +16,13 @@ use Tests\Relations\Traits\Owning;
 
 class ManyToManyTest extends RelationTestCase
 {
-    use Indexable, Orderable, Owning, Ownable, NonPrimary, IsMacroable, MockeryPHPUnitIntegration;
+    use Indexable;
+    use Orderable;
+    use Owning;
+    use Ownable;
+    use NonPrimary;
+    use IsMacroable;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @var ManyToMany
@@ -39,8 +45,12 @@ class ManyToManyTest extends RelationTestCase
             FluentEntity::class
         ));
 
-        $this->relation = new ManyToMany($this->builder, new DefaultNamingStrategy(), $this->field,
-            FluentEntity::class);
+        $this->relation = new ManyToMany(
+            $this->builder,
+            new DefaultNamingStrategy(),
+            $this->field,
+            FluentEntity::class
+        );
     }
 
     public function test_can_set_join_table()
@@ -59,8 +69,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('join_column', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -72,8 +84,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('join_column', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertTrue($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -85,8 +99,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('foreign_key', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -98,8 +114,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('foreign_key', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertTrue($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -111,8 +129,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('source', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -124,8 +144,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('source', $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['nullable']);
         $this->assertTrue($this->getAssocValue($this->field, 'joinTable')['joinColumns'][0]['unique']);
     }
@@ -136,10 +158,14 @@ class ManyToManyTest extends RelationTestCase
 
         $this->relation->build();
 
-        $this->assertEquals('inverse_key',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'inverse_key',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']
+        );
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['nullable']);
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['unique']);
     }
@@ -150,10 +176,14 @@ class ManyToManyTest extends RelationTestCase
 
         $this->relation->build();
 
-        $this->assertEquals('inverse_key',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'inverse_key',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']
+        );
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['nullable']);
         $this->assertTrue($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['unique']);
     }
@@ -165,8 +195,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('target', $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['nullable']);
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['unique']);
     }
@@ -178,8 +210,10 @@ class ManyToManyTest extends RelationTestCase
         $this->relation->build();
 
         $this->assertEquals('target', $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['name']);
-        $this->assertEquals('other_reference',
-            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']);
+        $this->assertEquals(
+            'other_reference',
+            $this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['referencedColumnName']
+        );
         $this->assertFalse($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['nullable']);
         $this->assertTrue($this->getAssocValue($this->field, 'joinTable')['inverseJoinColumns'][0]['unique']);
     }

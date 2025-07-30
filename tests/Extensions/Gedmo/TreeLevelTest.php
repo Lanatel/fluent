@@ -32,7 +32,7 @@ class TreeLevelTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'lvl';
+        $this->fieldName = 'lvl';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
         Field::make(new ClassMetadataBuilder($this->classMetadata), 'integer', $this->fieldName)->build();
 
@@ -43,8 +43,12 @@ class TreeLevelTest extends TestCase
     {
         TreeLevel::enable();
 
-        $field = Field::make(new ClassMetadataBuilder(
-            new ExtensibleClassMetadata('Foo')), 'integer', $this->fieldName
+        $field = Field::make(
+            new ClassMetadataBuilder(
+                new ExtensibleClassMetadata('Foo')
+            ),
+            'integer',
+            $this->fieldName
         )->build();
 
         $this->assertInstanceOf(
@@ -79,8 +83,9 @@ class TreeLevelTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

@@ -28,7 +28,7 @@ class LoggableTest extends TestCase
     protected function setUp(): void
     {
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->loggable      = new Loggable($this->classMetadata);
+        $this->loggable = new Loggable($this->classMetadata);
     }
 
     public function test_it_should_mark_the_entity_as_loggable()
@@ -68,12 +68,12 @@ class LoggableTest extends TestCase
 
     public function test_it_should_add_itself_as_a_builder_macro()
     {
-    	Loggable::enable();
-        
+        Loggable::enable();
+
         $entity = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
-        
+
         $entity->loggable();
-        
+
         $this->assertNotNull($this->classMetadata->getExtension(Fluent::EXTENSION_NAME));
     }
 
@@ -100,7 +100,6 @@ class LoggableTest extends TestCase
             'SomeEntity'
         );
 
-
         $relation->versioned();
         $relation->build();
 
@@ -117,7 +116,6 @@ class LoggableTest extends TestCase
             'someRelation',
             'SomeEntity'
         );
-
 
         $relation->versioned();
         $relation->build();

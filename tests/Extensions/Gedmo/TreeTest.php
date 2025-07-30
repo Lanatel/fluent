@@ -44,12 +44,13 @@ class TreeTest extends TestCase
     protected function setUp(): void
     {
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->builder       = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy);
-        $this->extension     = new Tree($this->builder);
+        $this->builder = new Builder(new ClassMetadataBuilder($this->classMetadata), new DefaultNamingStrategy());
+        $this->extension = new Tree($this->builder);
     }
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState false
      */
     public function test_it_should_add_itself_as_a_builder_macro()
@@ -64,6 +65,7 @@ class TreeTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState false
      */
     public function test_it_should_add_itself_as_a_builder_macro_with_optional_callback()
@@ -73,21 +75,21 @@ class TreeTest extends TestCase
         $mock = \Mockery::mock(['callMe' => true]);
         $mock->shouldReceive('callMe')->once();
 
-        $this->builder->tree(function(Tree $tree) use ($mock) {
+        $this->builder->tree(function (Tree $tree) use ($mock) {
             $mock->callMe();
         });
     }
 
     public function test_it_delegates_on_a_nested_set_buildable()
     {
-    	$nested = $this->extension->asNestedSet();
+        $nested = $this->extension->asNestedSet();
 
         $this->assertInstanceOf(NestedSet::class, $nested);
     }
 
     public function test_it_builds_the_delegated_nested_set_on_build()
     {
-    	$this->extension->asNestedSet();
+        $this->extension->asNestedSet();
         $this->extension->build();
 
         $this->assertEquals('nested', $this->classMetadata->getExtension($this->getExtensionName())['strategy']);
@@ -95,14 +97,14 @@ class TreeTest extends TestCase
 
     public function test_it_delegates_on_a_materialized_path_buildable()
     {
-    	$materializedPath = $this->extension->asMaterializedPath();
+        $materializedPath = $this->extension->asMaterializedPath();
 
         $this->assertInstanceOf(MaterializedPath::class, $materializedPath);
     }
 
     public function test_it_builds_the_delegated_materialized_path_on_build()
     {
-    	$this->extension->asMaterializedPath();
+        $this->extension->asMaterializedPath();
         $this->extension->build();
 
         $this->assertEquals('materializedPath', $this->classMetadata->getExtension($this->getExtensionName())['strategy']);
@@ -110,27 +112,27 @@ class TreeTest extends TestCase
 
     public function test_it_delegates_on_a_closure_table_buildable()
     {
-    	$materializedPath = $this->extension->asClosureTable("Foo");
+        $materializedPath = $this->extension->asClosureTable('Foo');
 
         $this->assertInstanceOf(ClosureTable::class, $materializedPath);
     }
 
     public function test_it_builds_the_delegated_closure_table_on_build()
     {
-    	$this->extension->asClosureTable("Foo");
+        $this->extension->asClosureTable('Foo');
         $this->extension->build();
 
         $this->assertEquals('closure', $this->classMetadata->getExtension($this->getExtensionName())['strategy']);
     }
-
 
     /**
      * Assert that the resulting build matches exactly with the given array.
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {
