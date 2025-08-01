@@ -84,7 +84,7 @@ class LifecycleEventsTest extends TestCase
             "Event [$event] is already associated!"
         );
 
-        for ($i = 0, $max = mt_rand(1, 5); $i < $max; ++$i) {
+        for ($i = 0, $max = mt_rand(1, 5); $i < $max; $i++) {
             $this->builder->$event(uniqid());
         }
 
@@ -96,8 +96,9 @@ class LifecycleEventsTest extends TestCase
         );
 
         $this->assertCount(
-            $max, $actual = $this->fluent->getClassMetadata()->getLifecycleCallbacks($event),
-            "Expected [$max] events associated for [$event], got " . count($actual)
+            $max,
+            $actual = $this->fluent->getClassMetadata()->getLifecycleCallbacks($event),
+            "Expected [$max] events associated for [$event], got ".count($actual)
         );
     }
 }

@@ -37,7 +37,7 @@ class ClosureTableTest extends TreeStrategyTest
     {
         Tree::enable();
 
-    	$this->builder->tree()->asClosureTable('Bar');
+        $this->builder->tree()->asClosureTable('Bar');
 
         $this->builder->belongsTo('Foo', 'parent')->treeParent();
         $this->builder->integer('lvl')->treeLevel();
@@ -54,7 +54,7 @@ class ClosureTableTest extends TreeStrategyTest
 
     public function test_it_adds_the_closure_table_repository_as_default()
     {
-    	$this->builder->tree()->asClosureTable('Bar');
+        $this->builder->tree()->asClosureTable('Bar');
         $this->builder->build();
 
         $this->assertEquals(

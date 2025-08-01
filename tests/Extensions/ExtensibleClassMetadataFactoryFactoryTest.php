@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions;
 
 use Doctrine\ORM\Configuration;
@@ -18,26 +19,27 @@ class ExtensibleClassMetadataFactoryFactoryTest extends TestCase
         $em = \Mockery::mock(EntityManager::class);
         $config = \Mockery::mock(Configuration::class);
         $namingStrategy = \Mockery::mock(NamingStrategy::class);
-        
+
         $em->shouldReceive('getConfiguration')->once()->andReturn($config);
         $config->shouldReceive('getNamingStrategy')->once()->andReturn($namingStrategy);
 
         $factory = new ExtensionFactoryTest();
         $factory->setEntityManager($em);
-        
+
         $this->assertInstanceOf(ExtensibleClassMetadata::class, $factory->getClassMetadataInstance());
     }
 }
 
-class ExtensionFactoryTest extends ExtensibleClassMetadataFactory {
+class ExtensionFactoryTest extends ExtensibleClassMetadataFactory
+{
     /**
      * This is the only sane way of testing the small part of what we do in this factory.
      * Every other test would require infinite mocking.
-     * 
+     *
      * @return ExtensibleClassMetadata
      */
     public function getClassMetadataInstance()
     {
-        return $this->newClassMetadataInstance("Foo");
+        return $this->newClassMetadataInstance('Foo');
     }
 }

@@ -33,7 +33,7 @@ class TranslationClassTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->className     = 'TranslationClass';
+        $this->className = 'TranslationClass';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
         $this->extension = new TranslationClass($this->classMetadata, $this->className);
     }
@@ -64,8 +64,9 @@ class TranslationClassTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

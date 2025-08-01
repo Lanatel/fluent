@@ -31,9 +31,9 @@ class SortableGroupTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'category';
+        $this->fieldName = 'category';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->extension     = new SortableGroup($this->classMetadata, $this->fieldName, 'name');
+        $this->extension = new SortableGroup($this->classMetadata, $this->fieldName, 'name');
     }
 
     public function test_it_should_add_itself_as_a_field_macro()
@@ -98,8 +98,9 @@ class SortableGroupTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

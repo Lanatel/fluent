@@ -4,5 +4,6 @@ namespace Tests\Stubs\Entities;
 
 class StubEntity2
 {
-    protected $id, $name;
+    protected $id;
+    protected $name;
 }

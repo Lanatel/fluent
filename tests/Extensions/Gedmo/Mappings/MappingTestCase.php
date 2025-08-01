@@ -37,6 +37,7 @@ abstract class MappingTestCase extends TestCase
 
     /**
      * Get the class name of the mapped class.
+     *
      * @return string
      */
     abstract protected function getMappedClass();
@@ -52,7 +53,7 @@ abstract class MappingTestCase extends TestCase
     protected function setUp(): void
     {
         $class = $this->getMappingClass();
-        $this->mapping = new $class;
+        $this->mapping = new $class();
 
         $this->builder = \Mockery::mock(Fluent::class);
         $this->field = \Mockery::mock(Field::class);
@@ -79,7 +80,7 @@ abstract class MappingTestCase extends TestCase
      */
     protected function generatedValueExpectation($strategy = 'identity')
     {
-        return \Mockery::on(function($argument) use ($strategy) {
+        return \Mockery::on(function ($argument) use ($strategy) {
             /** @var GeneratedValue|\Mockery\Mock $gen */
             $gen = \Mockery::mock(GeneratedValue::class);
             $gen->shouldReceive($strategy)->once();
@@ -89,6 +90,7 @@ abstract class MappingTestCase extends TestCase
             }
 
             $argument($gen);
+
             return true;
         });
     }

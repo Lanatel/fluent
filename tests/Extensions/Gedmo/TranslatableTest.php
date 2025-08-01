@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -30,7 +31,7 @@ class TranslatableTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'title';
+        $this->fieldName = 'title';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
         Field::make(new ClassMetadataBuilder($this->classMetadata), 'string', 'title')->build();
 
@@ -41,8 +42,11 @@ class TranslatableTest extends TestCase
     {
         Translatable::enable();
 
-        $field = Field::make(new ClassMetadataBuilder(new ExtensibleClassMetadata('Foo')), 'string',
-            $this->fieldName)->build();
+        $field = Field::make(
+            new ClassMetadataBuilder(new ExtensibleClassMetadata('Foo')),
+            'string',
+            $this->fieldName
+        )->build();
 
         $this->assertInstanceOf(
             Translatable::class,
@@ -77,8 +81,9 @@ class TranslatableTest extends TestCase
      *
      * @param array $expected
      *
-     * @return void
      * @throws \PHPUnit_Framework_ExpectationFailedException
+     *
+     * @return void
      */
     protected function assertBuildResultIs(array $expected)
     {

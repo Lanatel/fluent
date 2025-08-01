@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Extensions\Gedmo;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
@@ -13,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class TimestampableTest extends TestCase
 {
     use TrackingExtensions;
-    
+
     /**
      * @var Timestampable
      */
@@ -21,11 +22,11 @@ class TimestampableTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fieldName     = 'ip';
+        $this->fieldName = 'ip';
         $this->classMetadata = new ExtensibleClassMetadata('foo');
-        $this->extension     = new Timestampable($this->classMetadata, $this->fieldName);
+        $this->extension = new Timestampable($this->classMetadata, $this->fieldName);
     }
-    
+
     public function test_it_should_add_itself_as_a_field_macro()
     {
         Timestampable::enable();

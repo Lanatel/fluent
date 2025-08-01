@@ -28,7 +28,7 @@ class EmbeddedTest extends TestCase
 
         $this->embedded = new Embedded(
             $this->builder,
-            new DefaultNamingStrategy,
+            new DefaultNamingStrategy(),
             'field',
             FluentEmbeddable::class
         );

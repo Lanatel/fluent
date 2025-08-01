@@ -16,19 +16,19 @@ class LogEntryMappingTest extends MappingTestCase
         /** @var \Mockery\Mock|Entity $entity */
         $entity = \Mockery::mock(Entity::class);
         $entity->shouldReceive('setRepositoryClass')->with(LogEntryRepository::class)->andReturnSelf();
-        
+
         /** @var Index|\Mockery\Mock $index */
         $index = \Mockery::mock(Index::class);
-        $index->shouldReceive('name')->with("log_class_lookup_idx")->once()->andReturnSelf();
-        $index->shouldReceive('name')->with("log_date_lookup_idx")->once()->andReturnSelf();
-        $index->shouldReceive('name')->with("log_user_lookup_idx")->once()->andReturnSelf();
-        $index->shouldReceive('name')->with("log_version_lookup_idx")->once()->andReturnSelf();
-        
+        $index->shouldReceive('name')->with('log_class_lookup_idx')->once()->andReturnSelf();
+        $index->shouldReceive('name')->with('log_date_lookup_idx')->once()->andReturnSelf();
+        $index->shouldReceive('name')->with('log_user_lookup_idx')->once()->andReturnSelf();
+        $index->shouldReceive('name')->with('log_version_lookup_idx')->once()->andReturnSelf();
+
         $this->builder->shouldReceive('table')->with('ext_log_entries')->andReturnSelf();
-        $this->builder->shouldReceive('index')->with(["object_class"])->andReturn($index);
-        $this->builder->shouldReceive('index')->with(["logged_at"])->andReturn($index);
-        $this->builder->shouldReceive('index')->with(["username"])->andReturn($index);
-        $this->builder->shouldReceive('index')->with(["object_id", "object_class", "version"])->andReturn($index);
+        $this->builder->shouldReceive('index')->with(['object_class'])->andReturn($index);
+        $this->builder->shouldReceive('index')->with(['logged_at'])->andReturn($index);
+        $this->builder->shouldReceive('index')->with(['username'])->andReturn($index);
+        $this->builder->shouldReceive('index')->with(['object_id', 'object_class', 'version'])->andReturn($index);
         $this->builder->shouldReceive('entity')->andReturn($entity);
     }
 
