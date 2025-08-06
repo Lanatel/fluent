@@ -3,7 +3,6 @@
 namespace LaravelDoctrine\Fluent\Relations;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
 
