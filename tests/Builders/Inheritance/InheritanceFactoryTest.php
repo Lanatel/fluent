@@ -3,7 +3,7 @@
 namespace Tests\Builders\Inheritance;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Builders\Inheritance\Inheritance;
 use LaravelDoctrine\Fluent\Builders\Inheritance\InheritanceFactory;
@@ -21,7 +21,7 @@ class InheritanceFactoryTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
     }

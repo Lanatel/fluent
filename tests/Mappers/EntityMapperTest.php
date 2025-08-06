@@ -3,7 +3,7 @@
 namespace Tests\Mappers;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\Mappers\EntityMapper;
 use LaravelDoctrine\Fluent\Mappers\Mapper;
@@ -36,7 +36,7 @@ class EntityMapperTest extends TestCase
 
     public function test_it_should_delegate_the_proper_mapping_to_the_mapping_class()
     {
-        $metadata = new ClassMetadataInfo(StubEntity::class);
+        $metadata = new ClassMetadata(StubEntity::class);
         $builder = new Builder(new ClassMetadataBuilder($metadata));
 
         $this->mapper->map($builder);

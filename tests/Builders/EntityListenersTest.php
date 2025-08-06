@@ -4,7 +4,7 @@ namespace Tests\Builders;
 
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\EntityListeners;
 use PHPUnit\Framework\TestCase;
 use Tests\Stubs\Entities\StubEntity;
@@ -25,7 +25,7 @@ class EntityListenersTest extends TestCase
     protected function setUp(): void
     {
         $this->fluent = new ClassMetadataBuilder(
-            new ClassMetadataInfo(StubEntity::class)
+            new ClassMetadata(StubEntity::class)
         );
 
         $this->builder = new EntityListeners($this->fluent);

@@ -3,7 +3,7 @@
 namespace Tests\Builders;
 
 use Doctrine\ORM\Mapping\Builder\FieldBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\GeneratedValue;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class GeneratedValueTest extends TestCase
     protected $field;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ClassMetadataInfo
+     * @var \PHPUnit_Framework_MockObject_MockObject|ClassMetadata
      */
     protected $cm;
 
@@ -27,7 +27,7 @@ class GeneratedValueTest extends TestCase
     protected function setUp(): void
     {
         $this->field = $this->getMockBuilder(FieldBuilder::class)->disableOriginalConstructor()->getMock();
-        $this->cm = $this->getMockBuilder(ClassMetadataInfo::class)->disableOriginalConstructor()->getMock();
+        $this->cm = $this->getMockBuilder(ClassMetadata::class)->disableOriginalConstructor()->getMock();
 
         $this->fluent = new GeneratedValue($this->field, $this->cm);
     }

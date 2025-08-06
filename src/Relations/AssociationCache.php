@@ -2,7 +2,7 @@
 
 namespace LaravelDoctrine\Fluent\Relations;
 
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\Mapping\ClassMetadata;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -23,9 +23,9 @@ class AssociationCache implements Buildable
      * @var array
      */
     protected $usages = [
-        'READ_ONLY'            => ClassMetadataInfo::CACHE_USAGE_READ_ONLY,
-        'NONSTRICT_READ_WRITE' => ClassMetadataInfo::CACHE_USAGE_NONSTRICT_READ_WRITE,
-        'READ_WRITE'           => ClassMetadataInfo::CACHE_USAGE_READ_WRITE,
+        'READ_ONLY'            => ClassMetadata::CACHE_USAGE_READ_ONLY,
+        'NONSTRICT_READ_WRITE' => ClassMetadata::CACHE_USAGE_NONSTRICT_READ_WRITE,
+        'READ_WRITE'           => ClassMetadata::CACHE_USAGE_READ_WRITE,
     ];
 
     /**

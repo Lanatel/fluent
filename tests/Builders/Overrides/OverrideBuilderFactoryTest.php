@@ -3,7 +3,7 @@
 namespace Tests\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Builders\Overrides\AssociationOverride;
@@ -16,7 +16,7 @@ class OverrideBuilderFactoryTest extends TestCase
 {
     public function test_can_create_attribute_override()
     {
-        $builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
 
@@ -36,7 +36,7 @@ class OverrideBuilderFactoryTest extends TestCase
 
     public function test_can_create_association_override()
     {
-        $builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
 
@@ -59,7 +59,7 @@ class OverrideBuilderFactoryTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('No attribute or association could be found for some_field');
 
-        $builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
 

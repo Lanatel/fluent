@@ -3,7 +3,7 @@
 namespace Tests\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use Doctrine\ORM\Mapping\MappingException;
 use InvalidArgumentException;
@@ -22,7 +22,7 @@ class AssociationOverrideTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
 

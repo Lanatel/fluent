@@ -3,7 +3,7 @@
 namespace Tests\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use LaravelDoctrine\Fluent\Builders\Delay;
 use LaravelDoctrine\Fluent\Builders\Overrides\Override;
@@ -14,7 +14,7 @@ class OverrideTest extends TestCase
 {
     public function test_can_build_attribute_override()
     {
-        $meta = new ClassMetadataInfo(
+        $meta = new ClassMetadata(
             StubEntity::class
         );
 
@@ -37,7 +37,7 @@ class OverrideTest extends TestCase
 
     public function test_can_build_association_override()
     {
-        $meta = new ClassMetadataInfo(
+        $meta = new ClassMetadata(
             StubEntity::class
         );
 

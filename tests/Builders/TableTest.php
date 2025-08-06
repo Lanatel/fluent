@@ -3,7 +3,7 @@
 namespace Tests\Builders;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Table;
 use PHPUnit\Framework\TestCase;
 use Tests\Stubs\Entities\StubEntity;
@@ -22,7 +22,7 @@ class TableTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(StubEntity::class));
         $this->table = new Table($this->builder);
     }
 

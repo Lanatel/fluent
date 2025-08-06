@@ -3,7 +3,7 @@
 namespace Tests\Relations;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use LaravelDoctrine\Fluent\Relations\ManyToMany;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -41,7 +41,7 @@ class ManyToManyTest extends RelationTestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             FluentEntity::class
         ));
 
