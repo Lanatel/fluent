@@ -20,8 +20,9 @@ class ExtensibleClassMetadataFactoryFactoryTest extends TestCase
         $config = \Mockery::mock(Configuration::class);
         $namingStrategy = \Mockery::mock(NamingStrategy::class);
 
-        $em->shouldReceive('getConfiguration')->once()->andReturn($config);
+        $em->shouldReceive('getConfiguration')->twice()->andReturn($config);
         $config->shouldReceive('getNamingStrategy')->once()->andReturn($namingStrategy);
+        $config->shouldReceive('isNativeLazyObjectsEnabled')->once()->andReturn(true);
 
         $factory = new ExtensionFactoryTest();
         $factory->setEntityManager($em);

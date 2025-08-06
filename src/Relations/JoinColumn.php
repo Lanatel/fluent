@@ -58,21 +58,21 @@ class JoinColumn
      */
     public function __construct(
         NamingStrategy $namingStrategy,
-        $relation,
-        $joinColumn = null,
-        $referenceColumn = null,
-        $nullable = true,
-        $unique = false,
-        $onDelete = null,
-        $columnDefinition = null
+                       $relation,
+                       $joinColumn = null,
+                       $referenceColumn = null,
+                       $nullable = true,
+                       $unique = false,
+                       $onDelete = null,
+                       $columnDefinition = null
     ) {
-        $this->namingStrategy = $namingStrategy;
-        $this->relation = $relation;
-        $this->joinColumn = $joinColumn;
-        $this->referenceColumn = $referenceColumn;
-        $this->nullable = $nullable;
-        $this->unique = $unique;
-        $this->onDelete = $onDelete;
+        $this->namingStrategy   = $namingStrategy;
+        $this->relation         = $relation;
+        $this->joinColumn       = $joinColumn;
+        $this->referenceColumn  = $referenceColumn;
+        $this->nullable         = $nullable;
+        $this->unique           = $unique;
+        $this->onDelete         = $onDelete;
         $this->columnDefinition = $columnDefinition;
     }
 
@@ -125,7 +125,7 @@ class JoinColumn
      */
     public function getJoinColumn()
     {
-        return $this->joinColumn ?: $this->namingStrategy->joinColumnName($this->relation);
+        return $this->joinColumn ?: $this->namingStrategy->joinColumnName($this->relation, $this->relation);
     }
 
     /**
