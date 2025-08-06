@@ -2,8 +2,13 @@
 
 namespace LaravelDoctrine\Fluent\Builders\Overrides;
 
+use ArrayAccess;
+use Doctrine\ORM\Mapping\AssociationMapping;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\JoinColumnMapping;
+use Doctrine\ORM\Mapping\JoinTableMapping;
+use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -49,13 +54,13 @@ class AssociationOverride implements Buildable
      */
     public function __construct(
         ClassMetadataBuilder $builder,
-        NamingStrategy $namingStrategy,
-        $name,
-        callable $callback
+        NamingStrategy       $namingStrategy,
+                             $name,
+        callable             $callback
     ) {
-        $this->builder = $builder;
-        $this->callback = $callback;
-        $this->name = $name;
+        $this->builder        = $builder;
+        $this->callback       = $callback;
+        $this->name           = $name;
         $this->namingStrategy = $namingStrategy;
     }
 
@@ -67,12 +72,12 @@ class AssociationOverride implements Buildable
         $callback = $this->callback;
 
         // We will create a new class metadata builder instance,
-        // so we can use it to easily generated a new mapping
+        // so we can use it to easily generate a new mapping
         // array, without re-declaring the existing association
         $builder = $this->newClassMetadataBuilder();
         $source = $this->convertToMappingArray($this->builder);
 
-        if (!isset($this->relations[$source['type']])) {
+        if (!isset($this->relations[$source->type()])) {
             throw new InvalidArgumentException('Only ManyToMany and ManyToOne relations can be overridden');
         }
 
@@ -82,12 +87,12 @@ class AssociationOverride implements Buildable
         // Give the original join table name, so we won't
         // accidentally remove custom join table names
         if ($this->hasJoinTable($source)) {
-            $associationBuilder->setJoinTable($source['joinTable']['name']);
+            $associationBuilder->setJoinTable($source->joinTable->name);
         }
 
         $association = $callback($associationBuilder);
 
-        // When the user forget to return, use the $associationBuilder instance
+        // When the user forgets to return, use the $associationBuilder instance
         // which contains the same information
         $association = $association ?: $associationBuilder;
 
@@ -104,16 +109,16 @@ class AssociationOverride implements Buildable
         // ManyToMany mappings
         if ($this->hasJoinTable($target)) {
             $overrideMapping['joinTable'] = $this->mapJoinTable(
-                $target['joinTable'],
-                $source['joinTable']
+                $target->joinTable,
+                $source->joinTable
             );
         }
 
         // ManyToOne mappings
         if ($this->hasJoinColumns($target)) {
             $overrideMapping['joinColumns'] = $this->mapJoinColumns(
-                $target['joinColumns'],
-                $source['joinColumns']
+                $target->joinColumns,
+                $source->joinColumns
             );
         }
 
@@ -126,9 +131,9 @@ class AssociationOverride implements Buildable
     /**
      * @param ClassMetadataBuilder $builder
      *
-     * @throws \Doctrine\ORM\Mapping\MappingException
+     * @throws MappingException
      *
-     * @return array
+     * @return AssociationMapping
      */
     protected function convertToMappingArray(ClassMetadataBuilder $builder)
     {
@@ -148,42 +153,36 @@ class AssociationOverride implements Buildable
     }
 
     /**
-     * @param $builder
-     * @param $source
-     *
      * @return mixed
      */
-    protected function getAssociationBuilder(ClassMetadataBuilder $builder, array $source)
+    protected function getAssociationBuilder(ClassMetadataBuilder $builder, AssociationMapping $source)
     {
-        return new $this->relations[$source['type']](
+        return new $this->relations[$source->type()](
             $builder,
             $this->namingStrategy,
             $this->name,
-            $source['targetEntity']
+            $source->targetEntity
         );
     }
 
     /**
-     * @param array $target
-     * @param array $source
-     *
      * @return array
      */
-    protected function mapJoinTable(array $target = [], array $source = [])
+    protected function mapJoinTable(JoinTableMapping $target, JoinTableMapping $source)
     {
-        $joinTable['name'] = $target['name'];
+        $joinTable['name'] = $target->name;
 
         if ($this->hasJoinColumns($target)) {
             $joinTable['joinColumns'] = $this->mapJoinColumns(
-                $target['joinColumns'],
-                $source['joinColumns']
+                $target->joinColumns,
+                $source->joinColumns
             );
         }
 
         if ($this->hasInverseJoinColumns($target)) {
             $joinTable['inverseJoinColumns'] = $this->mapJoinColumns(
-                $target['inverseJoinColumns'],
-                $source['inverseJoinColumns']
+                $target->inverseJoinColumns,
+                $source->inverseJoinColumns
             );
         }
 
@@ -191,8 +190,8 @@ class AssociationOverride implements Buildable
     }
 
     /**
-     * @param array $target
-     * @param array $source
+     * @param array<JoinColumnMapping> $target
+     * @param array<JoinColumnMapping> $source
      *
      * @return mixed
      *
@@ -200,12 +199,12 @@ class AssociationOverride implements Buildable
      * @internal param $source
      * @internal param $overrideMapping
      */
-    protected function mapJoinColumns(array $target = [], array $source = [])
+    protected function mapJoinColumns(array $target, array $source)
     {
         $joinColumns = [];
         foreach ($target as $index => $joinColumn) {
-            if (isset($source[$index])) {
-                $diff = array_diff($joinColumn, $source[$index]);
+            if (isset($source->$index)) {
+                $diff = array_diff((array)$joinColumn, $source->$index);
 
                 if (!empty($diff)) {
                     $joinColumns[] = $diff;
@@ -217,32 +216,32 @@ class AssociationOverride implements Buildable
     }
 
     /**
-     * @param array $target
+     * @param ArrayAccess $target
      *
      * @return bool
      */
-    protected function hasJoinColumns(array $target = [])
+    protected function hasJoinColumns(ArrayAccess $target)
     {
-        return isset($target['joinColumns']);
+        return isset($target->joinColumns);
     }
 
     /**
-     * @param array $target
+     * @param ArrayAccess $target
      *
      * @return bool
      */
-    protected function hasInverseJoinColumns(array $target = [])
+    protected function hasInverseJoinColumns(ArrayAccess $target)
     {
-        return isset($target['inverseJoinColumns']);
+        return isset($target->inverseJoinColumns);
     }
 
     /**
-     * @param array $target
+     * @param ArrayAccess $target
      *
      * @return bool
      */
-    protected function hasJoinTable(array $target = [])
+    protected function hasJoinTable(ArrayAccess $target)
     {
-        return isset($target['joinTable']);
+        return isset($target->joinTable);
     }
 }
