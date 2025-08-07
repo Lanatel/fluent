@@ -35,7 +35,7 @@ class TableTest extends TestCase
 
     public function test_it_ignores_empty_names()
     {
-        $this->assertNull($this->builder->getClassMetadata()->table);
+        $this->assertFalse(isset($this->builder->getClassMetadata()->table));
     }
 
     public function test_it_can_be_constructed_with_a_callback_instead_of_a_name()
@@ -87,14 +87,14 @@ class TableTest extends TestCase
 
     public function test_set_options_does_not_touch_other_data()
     {
-        $table = $this->table->getClassMetadata()->table;
+        $classMetadata = $this->table->getClassMetadata();
 
         $this->table->options(['collate' => 'utf8mb4_unicode_ci']);
-        $table['options'] = ['collate' => 'utf8mb4_unicode_ci'];
+        $classMetadata->table['options'] = ['collate' => 'utf8mb4_unicode_ci'];
 
         $this->table->build();
 
-        $this->assertEquals($table, $this->builder->getClassMetadata()->table);
+        $this->assertEquals($classMetadata->table, $this->builder->getClassMetadata()->table);
     }
 
     public function test_can_set_options_and_change_schema()
