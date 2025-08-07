@@ -44,7 +44,7 @@ class GeneratedValue implements Buildable
     protected $classMetadata;
 
     /**
-     * @param FieldBuilder      $builder
+     * @param FieldBuilder  $builder
      * @param ClassMetadata $classMetadata
      */
     public function __construct(FieldBuilder $builder, ClassMetadata $classMetadata)

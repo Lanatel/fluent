@@ -87,7 +87,7 @@ class AttributeOverride implements Buildable
 
         $this->builder->getClassMetadata()->setAttributeOverride(
             $this->name,
-            $this->mergeRecursively((array)$source, (array)$target)
+            $this->mergeRecursively((array) $source, (array) $target)
         );
     }
 
