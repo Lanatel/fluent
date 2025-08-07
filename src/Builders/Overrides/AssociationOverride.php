@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
+use LaravelDoctrine\Fluent\Relations\AssociationCache;
 use LaravelDoctrine\Fluent\Relations\ManyToMany;
 use LaravelDoctrine\Fluent\Relations\ManyToOne;
 use LaravelDoctrine\Fluent\Relations\Relation;
@@ -100,7 +101,9 @@ class AssociationOverride implements Buildable
             throw new InvalidArgumentException('The callback should return an instance of '.Relation::class);
         }
 
-        $association->build();
+        $association instanceof AssociationCache ?
+            $association->build($source->targetEntity) :
+            $association->build();
 
         $target = $this->convertToMappingArray($builder);
 

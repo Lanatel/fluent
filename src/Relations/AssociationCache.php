@@ -5,68 +5,48 @@ namespace LaravelDoctrine\Fluent\Relations;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
+use LaravelDoctrine\Fluent\Relations\Mappings\Association\ConcreteAssociationMapping;
 
 class AssociationCache implements Buildable
 {
-    /**
-     * @var string
-     */
-    protected $region;
+    protected string $region;
+
+    protected string $usage;
 
     /**
-     * @var string
+     * @var array<string, int>
      */
-    protected $usage;
-
-    /**
-     * @var array
-     */
-    protected $usages = [
+    protected array $usages = [
         'READ_ONLY'            => ClassMetadata::CACHE_USAGE_READ_ONLY,
         'NONSTRICT_READ_WRITE' => ClassMetadata::CACHE_USAGE_NONSTRICT_READ_WRITE,
         'READ_WRITE'           => ClassMetadata::CACHE_USAGE_READ_WRITE,
     ];
 
-    /**
-     * @var string
-     */
-    protected $field;
+    protected string        $field;
 
-    /**
-     * @var ClassMetadata
-     */
-    protected $metadata;
+    protected ClassMetadata $metadata;
 
-    /**
-     * @param ClassMetadata $metadata
-     * @param string        $field
-     * @param string|int    $usage
-     * @param string|null   $region
-     */
-    public function __construct(ClassMetadata $metadata, $field, $usage = 'READ_ONLY', $region = null)
-    {
-        $this->field = $field;
+    public function __construct(
+        ClassMetadata $metadata,
+        string        $field,
+        string|int    $usage = 'READ_ONLY',
+        ?string       $region = null
+    ) {
+        $this->field    = $field;
         $this->metadata = $metadata;
         $this->setRegion($region);
         $this->setUsage($usage);
     }
 
-    /**
-     * @return string
-     */
-    public function getUsage()
+    public function getUsage(): string
     {
         return $this->usage;
     }
 
     /**
-     * @param string $usage
-     *
      * @throws InvalidArgumentException
-     *
-     * @return AssociationCache
      */
-    public function setUsage($usage)
+    public function setUsage(string|int $usage): self
     {
         if (is_int($usage)) {
             $this->validate($usage, $this->usages);
@@ -80,20 +60,12 @@ class AssociationCache implements Buildable
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRegion()
+    public function getRegion(): string
     {
         return $this->region;
     }
 
-    /**
-     * @param string $region
-     *
-     * @return AssociationCache
-     */
-    public function setRegion($region)
+    public function setRegion(string $region): self
     {
         $this->region = $region;
 
@@ -103,21 +75,23 @@ class AssociationCache implements Buildable
     /**
      * Execute the build process.
      */
-    public function build()
+    public function build(string $targetEntity = ''): void
     {
+        if (!isset($this->metadata->associationMappings[$this->field])) {
+            $this->metadata->associationMappings[$this->field] = new ConcreteAssociationMapping(
+                $this->field,
+                $this->metadata->rootEntityName,
+                $targetEntity
+            );
+        }
+
         $this->metadata->enableAssociationCache($this->field, [
             'usage'  => $this->getUsage(),
             'region' => $this->getRegion(),
         ]);
     }
 
-    /**
-     * @param string|int $usage
-     * @param array      $usages
-     *
-     * @return mixed
-     */
-    protected function validate($usage, array $usages)
+    protected function validate(string|int $usage, array $usages): string|int
     {
         if (!in_array($usage, $usages)) {
             throw new InvalidArgumentException(
