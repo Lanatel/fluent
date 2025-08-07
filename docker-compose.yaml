@@ -13,5 +13,3 @@ services:
       - XDEBUG_MODE=debug
       - XDEBUG_CONFIG=client_host=host.docker.internal client_port=9003
       - PHP_IDE_CONFIG=serverName=laravel-doctrine-fluent
-    networks:
-      - app-network
