@@ -4,6 +4,7 @@ namespace Tests\Extensions;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadataFactory;
@@ -37,7 +38,7 @@ class ExtensionFactoryTest extends ExtensibleClassMetadataFactory
      * This is the only sane way of testing the small part of what we do in this factory.
      * Every other test would require infinite mocking.
      *
-     * @return ExtensibleClassMetadata
+     * @return ExtensibleClassMetadata|ClassMetadata
      */
     public function getClassMetadataInstance()
     {
