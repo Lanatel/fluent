@@ -15,7 +15,3 @@ services:
       - PHP_IDE_CONFIG=serverName=laravel-doctrine-fluent
     networks:
       - app-network
-
-networks:
-  app-network:
-    driver: bridge
