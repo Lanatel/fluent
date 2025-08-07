@@ -203,8 +203,8 @@ class AssociationOverride implements Buildable
     {
         $joinColumns = [];
         foreach ($target as $index => $joinColumn) {
-            if (isset($source->$index)) {
-                $diff = array_diff((array)$joinColumn, $source->$index);
+            if (isset($source[$index])) {
+                $diff = array_diff((array)$joinColumn, (array)$source[$index]);
 
                 if (!empty($diff)) {
                     $joinColumns[] = $diff;
