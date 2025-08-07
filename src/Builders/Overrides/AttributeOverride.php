@@ -5,7 +5,6 @@ namespace LaravelDoctrine\Fluent\Builders\Overrides;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\FieldMapping;
-use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -41,13 +40,13 @@ class AttributeOverride implements Buildable
      */
     public function __construct(
         ClassMetadataBuilder $builder,
-        NamingStrategy       $namingStrategy,
-                             $name,
-        callable             $callback
+        NamingStrategy $namingStrategy,
+        $name,
+        callable $callback
     ) {
-        $this->builder        = $builder;
-        $this->callback       = $callback;
-        $this->name           = $name;
+        $this->builder = $builder;
+        $this->callback = $callback;
+        $this->name = $name;
         $this->namingStrategy = $namingStrategy;
     }
 
@@ -59,7 +58,7 @@ class AttributeOverride implements Buildable
         $callback = $this->callback;
 
         // We will create a new class metadata builder instance,
-        // so we can use it to easily generate a new mapping
+        // so we can use it to easily generated a new mapping
         // array, without re-declaring the existing field
         $builder = $this->newClassMetadataBuilder();
 
@@ -74,7 +73,7 @@ class AttributeOverride implements Buildable
 
         $field = $callback($fieldBuilder);
 
-        // When the user forgets to return, use the Field instance
+        // When the user forget to return, use the Field instance
         // which contains the same information
         $field = $field ?: $fieldBuilder;
 
@@ -94,6 +93,7 @@ class AttributeOverride implements Buildable
 
     /**
      * @param ClassMetadataBuilder $builder
+     * @param FieldMapping         $mapping
      *
      * @return Field
      */
@@ -109,7 +109,7 @@ class AttributeOverride implements Buildable
     /**
      * @param ClassMetadataBuilder $builder
      *
-     * @throws MappingException
+     * @throws \Doctrine\ORM\Mapping\MappingException
      *
      * @return FieldMapping
      */

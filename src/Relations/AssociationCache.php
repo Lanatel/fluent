@@ -9,9 +9,15 @@ use LaravelDoctrine\Fluent\Relations\Mappings\Association\ConcreteAssociationMap
 
 class AssociationCache implements Buildable
 {
-    protected string $region;
+    /**
+     * @var string
+     */
+    protected $region;
 
-    protected string $usage;
+    /**
+     * @var string
+     */
+    protected $usage;
 
     /**
      * @var array<string, int>
@@ -22,31 +28,46 @@ class AssociationCache implements Buildable
         'READ_WRITE'           => ClassMetadata::CACHE_USAGE_READ_WRITE,
     ];
 
-    protected string        $field;
+    /**
+     * @var string
+     */
+    protected $field;
 
-    protected ClassMetadata $metadata;
+    /**
+     * @var ClassMetadata
+     */
+    protected $metadata;
 
-    public function __construct(
-        ClassMetadata $metadata,
-        string        $field,
-        string|int    $usage = 'READ_ONLY',
-        ?string       $region = null
-    ) {
-        $this->field    = $field;
+    /**
+     * @param ClassMetadata $metadata
+     * @param string        $field
+     * @param string|int    $usage
+     * @param string|null   $region
+     */
+    public function __construct(ClassMetadata $metadata, $field, $usage = 'READ_ONLY', $region = null)
+    {
+        $this->field = $field;
         $this->metadata = $metadata;
         $this->setRegion($region);
         $this->setUsage($usage);
     }
 
-    public function getUsage(): string
+    /**
+     * @return string
+     */
+    public function getUsage()
     {
         return $this->usage;
     }
 
     /**
+     * @param string $usage
+     *
      * @throws InvalidArgumentException
+     *
+     * @return AssociationCache
      */
-    public function setUsage(string|int $usage): self
+    public function setUsage($usage)
     {
         if (is_int($usage)) {
             $this->validate($usage, $this->usages);
@@ -60,12 +81,20 @@ class AssociationCache implements Buildable
         return $this;
     }
 
-    public function getRegion(): string
+    /**
+     * @return string
+     */
+    public function getRegion()
     {
         return $this->region;
     }
 
-    public function setRegion(string $region): self
+    /**
+     * @param string $region
+     *
+     * @return AssociationCache
+     */
+    public function setRegion($region)
     {
         $this->region = $region;
 
@@ -91,7 +120,13 @@ class AssociationCache implements Buildable
         ]);
     }
 
-    protected function validate(string|int $usage, array $usages): string|int
+    /**
+     * @param string|int $usage
+     * @param array      $usages
+     *
+     * @return mixed
+     */
+    protected function validate($usage, array $usages)
     {
         if (!in_array($usage, $usages)) {
             throw new InvalidArgumentException(

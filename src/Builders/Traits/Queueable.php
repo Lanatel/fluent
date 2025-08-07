@@ -51,9 +51,7 @@ trait Queueable
         }
 
         foreach ($delayed as $buildable) {
-            $buildable instanceof AssociationCache ?
-                $buildable->build($this->entity) :
-                $buildable->build();
+            $buildable->build();
         }
     }
 

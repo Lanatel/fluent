@@ -22,7 +22,7 @@ class ExtensibleClassMetadataFactoryFactoryTest extends TestCase
 
         $em->shouldReceive('getConfiguration')->twice()->andReturn($config);
         $config->shouldReceive('getNamingStrategy')->once()->andReturn($namingStrategy);
-        $config->shouldReceive('isNativeLazyObjectsEnabled')->once()->andReturn(true);
+        $config->shouldReceive('isNativeLazyObjectsEnabled')->once()->andReturn(false);
 
         $factory = new ExtensionFactoryTest();
         $factory->setEntityManager($em);

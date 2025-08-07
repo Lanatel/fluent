@@ -55,13 +55,13 @@ class AssociationOverride implements Buildable
      */
     public function __construct(
         ClassMetadataBuilder $builder,
-        NamingStrategy       $namingStrategy,
-                             $name,
-        callable             $callback
+        NamingStrategy $namingStrategy,
+        $name,
+        callable $callback
     ) {
-        $this->builder        = $builder;
-        $this->callback       = $callback;
-        $this->name           = $name;
+        $this->builder = $builder;
+        $this->callback = $callback;
+        $this->name = $name;
         $this->namingStrategy = $namingStrategy;
     }
 
@@ -73,7 +73,7 @@ class AssociationOverride implements Buildable
         $callback = $this->callback;
 
         // We will create a new class metadata builder instance,
-        // so we can use it to easily generate a new mapping
+        // so we can use it to easily generated a new mapping
         // array, without re-declaring the existing association
         $builder = $this->newClassMetadataBuilder();
         $source = $this->convertToMappingArray($this->builder);
@@ -93,7 +93,7 @@ class AssociationOverride implements Buildable
 
         $association = $callback($associationBuilder);
 
-        // When the user forgets to return, use the $associationBuilder instance
+        // When the user forget to return, use the $associationBuilder instance
         // which contains the same information
         $association = $association ?: $associationBuilder;
 
@@ -202,7 +202,7 @@ class AssociationOverride implements Buildable
      * @internal param $source
      * @internal param $overrideMapping
      */
-    protected function mapJoinColumns(array $target, array $source)
+    protected function mapJoinColumns(array $target = [], array $source = [])
     {
         $joinColumns = [];
         foreach ($target as $index => $joinColumn) {

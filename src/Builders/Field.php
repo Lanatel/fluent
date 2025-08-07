@@ -93,7 +93,7 @@ class Field implements Buildable
      * @param string               $type
      * @param string               $name
      *
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      *
      * @return Field
      */

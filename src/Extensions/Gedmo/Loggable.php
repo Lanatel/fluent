@@ -11,14 +11,24 @@ use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Loggable implements Buildable, Extension
 {
-    private ExtensibleClassMetadata $classMetadata;
+    /**
+     * @var ExtensibleClassMetadata
+     */
+    private $classMetadata;
 
-    private ?string                 $logEntry;
+    /**
+     * @var string|null
+     */
+    private $logEntry;
 
-    public function __construct(ExtensibleClassMetadata|ClassMetadata $classMetadata, ?string $logEntry = null)
+    /**
+     * @param ExtensibleClassMetadata|ClassMetadata $classMetadata
+     * @param string|null                           $logEntry
+     */
+    public function __construct(ExtensibleClassMetadata $classMetadata, $logEntry = null)
     {
         $this->classMetadata = $classMetadata;
-        $this->logEntry      = $logEntry;
+        $this->logEntry = $logEntry;
     }
 
     /**
