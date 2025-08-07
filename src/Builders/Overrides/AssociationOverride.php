@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\JoinColumnMapping;
 use Doctrine\ORM\Mapping\JoinTableMapping;
-use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -134,7 +133,7 @@ class AssociationOverride implements Buildable
     /**
      * @param ClassMetadataBuilder $builder
      *
-     * @throws MappingException
+     * @throws \Doctrine\ORM\Mapping\MappingException
      *
      * @return AssociationMapping
      */
