@@ -22,7 +22,7 @@ class AssociationCache implements Buildable
     /**
      * @var array<string, int>
      */
-    protected array $usages = [
+    protected $usages = [
         'READ_ONLY'            => ClassMetadata::CACHE_USAGE_READ_ONLY,
         'NONSTRICT_READ_WRITE' => ClassMetadata::CACHE_USAGE_NONSTRICT_READ_WRITE,
         'READ_WRITE'           => ClassMetadata::CACHE_USAGE_READ_WRITE,
