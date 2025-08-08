@@ -2,6 +2,7 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Tree\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
@@ -142,7 +143,7 @@ abstract class TreeStrategy implements Buildable, Extension
     }
 
     /**
-     * @return ExtensibleClassMetadata
+     * @return ExtensibleClassMetadata|ClassMetadata
      */
     protected function getClassMetadata()
     {
