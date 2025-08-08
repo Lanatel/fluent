@@ -4,7 +4,6 @@ namespace LaravelDoctrine\Fluent\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\FieldMapping;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -87,21 +86,21 @@ class AttributeOverride implements Buildable
 
         $this->builder->getClassMetadata()->setAttributeOverride(
             $this->name,
-            $this->mergeRecursively((array) $source, (array) $target)
+            $this->mergeRecursively($source, $target)
         );
     }
 
     /**
      * @param ClassMetadataBuilder $builder
-     * @param FieldMapping         $mapping
+     * @param array                $mapping
      *
      * @return Field
      */
-    protected function getFieldBuilder(ClassMetadataBuilder $builder, FieldMapping $mapping)
+    protected function getFieldBuilder(ClassMetadataBuilder $builder, array $mapping)
     {
         return Field::make(
             $builder,
-            $mapping->type,
+            $mapping['type'],
             $this->name
         );
     }
@@ -111,13 +110,13 @@ class AttributeOverride implements Buildable
      *
      * @throws \Doctrine\ORM\Mapping\MappingException
      *
-     * @return FieldMapping
+     * @return array
      */
     protected function convertToMappingArray(ClassMetadataBuilder $builder)
     {
         $metadata = $builder->getClassMetadata();
 
-        return $metadata->getFieldMapping($this->name);
+        return (array) $metadata->getFieldMapping($this->name);
     }
 
     /**

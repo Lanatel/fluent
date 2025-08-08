@@ -2,12 +2,8 @@
 
 namespace LaravelDoctrine\Fluent\Builders\Overrides;
 
-use ArrayAccess;
-use Doctrine\ORM\Mapping\AssociationMapping;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\JoinColumnMapping;
-use Doctrine\ORM\Mapping\JoinTableMapping;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -77,7 +73,7 @@ class AssociationOverride implements Buildable
         $builder = $this->newClassMetadataBuilder();
         $source = $this->convertToMappingArray($this->builder);
 
-        if (!isset($this->relations[$source->type()])) {
+        if (!isset($this->relations[$source['type']])) {
             throw new InvalidArgumentException('Only ManyToMany and ManyToOne relations can be overridden');
         }
 
@@ -86,8 +82,8 @@ class AssociationOverride implements Buildable
 
         // Give the original join table name, so we won't
         // accidentally remove custom join table names
-        if ($this->hasJoinTable((array) $source)) {
-            $associationBuilder->setJoinTable($source->joinTable->name);
+        if ($this->hasJoinTable($source)) {
+            $associationBuilder->setJoinTable($source['joinTable']['name']);
         }
 
         $association = $callback($associationBuilder);
@@ -101,7 +97,7 @@ class AssociationOverride implements Buildable
         }
 
         $association instanceof AssociationCache ?
-            $association->build($source->targetEntity) :
+            $association->build($source['targetEntity']) :
             $association->build();
 
         $target = $this->convertToMappingArray($builder);
@@ -109,18 +105,18 @@ class AssociationOverride implements Buildable
         $overrideMapping = [];
 
         // ManyToMany mappings
-        if ($this->hasJoinTable((array) $target)) {
+        if ($this->hasJoinTable($target)) {
             $overrideMapping['joinTable'] = $this->mapJoinTable(
-                $target->joinTable,
-                $source->joinTable
+                (array) $target['joinTable'],
+                (array) $source['joinTable']
             );
         }
 
         // ManyToOne mappings
-        if ($this->hasJoinColumns((array) $target)) {
+        if ($this->hasJoinColumns($target)) {
             $overrideMapping['joinColumns'] = $this->mapJoinColumns(
-                $target->joinColumns,
-                $source->joinColumns
+                $target['joinColumns'],
+                $source['joinColumns']
             );
         }
 
@@ -135,13 +131,16 @@ class AssociationOverride implements Buildable
      *
      * @throws \Doctrine\ORM\Mapping\MappingException
      *
-     * @return AssociationMapping
+     * @return array
      */
     protected function convertToMappingArray(ClassMetadataBuilder $builder)
     {
         $metadata = $builder->getClassMetadata();
 
-        return $metadata->getAssociationMapping($this->name);
+        $associationMappingArray = (array) $metadata->getAssociationMapping($this->name);
+        $associationMappingArray['type'] = $metadata->getAssociationMapping($this->name)->type();
+
+        return $associationMappingArray;
     }
 
     /**
@@ -155,36 +154,42 @@ class AssociationOverride implements Buildable
     }
 
     /**
+     * @param $builder
+     * @param $source
+     *
      * @return mixed
      */
-    protected function getAssociationBuilder(ClassMetadataBuilder $builder, AssociationMapping $source)
+    protected function getAssociationBuilder(ClassMetadataBuilder $builder, array $source)
     {
-        return new $this->relations[$source->type()](
+        return new $this->relations[$source['type']](
             $builder,
             $this->namingStrategy,
             $this->name,
-            $source->targetEntity
+            $source['targetEntity']
         );
     }
 
     /**
+     * @param array $target
+     * @param array $source
+     *
      * @return array
      */
-    protected function mapJoinTable(JoinTableMapping $target, JoinTableMapping $source)
+    protected function mapJoinTable(array $target = [], array $source = [])
     {
-        $joinTable['name'] = $target->name;
+        $joinTable['name'] = $target['name'];
 
-        if ($this->hasJoinColumns((array) $target)) {
+        if ($this->hasJoinColumns($target)) {
             $joinTable['joinColumns'] = $this->mapJoinColumns(
-                $target->joinColumns,
-                $source->joinColumns
+                $target['joinColumns'],
+                $source['joinColumns']
             );
         }
 
-        if ($this->hasInverseJoinColumns((array) $target)) {
+        if ($this->hasInverseJoinColumns($target)) {
             $joinTable['inverseJoinColumns'] = $this->mapJoinColumns(
-                $target->inverseJoinColumns,
-                $source->inverseJoinColumns
+                $target['inverseJoinColumns'],
+                $source['inverseJoinColumns']
             );
         }
 
@@ -192,8 +197,8 @@ class AssociationOverride implements Buildable
     }
 
     /**
-     * @param array<JoinColumnMapping> $target
-     * @param array<JoinColumnMapping> $source
+     * @param array $target
+     * @param array $source
      *
      * @return mixed
      *
