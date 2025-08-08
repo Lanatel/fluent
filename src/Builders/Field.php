@@ -6,6 +6,7 @@ use BadMethodCallException;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\Builder\FieldBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Traits\Macroable;
 use LaravelDoctrine\Fluent\Builders\Traits\Queueable;
@@ -56,7 +57,7 @@ class Field implements Buildable
     protected $metaDatabuilder;
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata|ExtensibleClassMetadata
      */
     protected $classMetadata;
 
@@ -82,9 +83,7 @@ class Field implements Buildable
     {
         $this->fieldBuilder = $fieldBuilder;
         $this->metaDatabuilder = $builder;
-
         $this->classMetadata = $builder->getClassMetadata();
-
         $this->type = $type;
         $this->name = $name;
     }
@@ -124,7 +123,7 @@ class Field implements Buildable
     }
 
     /**
-     * @return ExtensibleClassMetadata
+     * @return ClassMetadata|ExtensibleClassMetadata
      */
     public function getClassMetadata()
     {
