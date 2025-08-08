@@ -2,10 +2,10 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Loggable\Mapping\Driver\Fluent;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Relations\ManyToOne;
 use LaravelDoctrine\Fluent\Relations\OneToOne;
 
@@ -14,7 +14,7 @@ class Versioned implements Buildable
     const MACRO_METHOD = 'versioned';
 
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     private $classMetadata;
 
@@ -26,10 +26,10 @@ class Versioned implements Buildable
     /**
      * Versioned constructor.
      *
-     * @param ClassMetadata $classMetadata
-     * @param string        $fieldName
+     * @param ExtensibleClassMetadata $classMetadata
+     * @param string                  $fieldName
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName)
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

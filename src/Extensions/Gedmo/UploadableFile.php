@@ -2,16 +2,16 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Uploadable\Mapping\Driver\Fluent as UploadableDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 class UploadableFile implements Buildable
 {
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     private $classMetadata;
 
@@ -33,11 +33,11 @@ class UploadableFile implements Buildable
     /**
      * UploadableFile constructor.
      *
-     * @param ClassMetadata $classMetadata
-     * @param string        $fieldName
-     * @param string        $type
+     * @param ExtensibleClassMetadata $classMetadata
+     * @param string                  $fieldName
+     * @param string                  $type
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName, $type = 'Name')
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName, $type = 'Name')
     {
         $this->validateType($type);
 

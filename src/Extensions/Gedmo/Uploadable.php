@@ -2,12 +2,12 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Uploadable\Mapping\Driver\Fluent as UploadableDriver;
 use Gedmo\Uploadable\Mapping\Validator;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\Builders\Delay;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Uploadable implements Buildable, Delay, Extension
@@ -60,14 +60,14 @@ class Uploadable implements Buildable, Delay, Extension
     private $disallowedTypes = '';
 
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     private $classMetadata;
 
     /**
-     * @param ClassMetadata $classMetadata
+     * @param ExtensibleClassMetadata $classMetadata
      */
-    public function __construct(ClassMetadata $classMetadata)
+    public function __construct(ExtensibleClassMetadata $classMetadata)
     {
         $this->classMetadata = $classMetadata;
     }

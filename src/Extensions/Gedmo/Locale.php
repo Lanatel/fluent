@@ -2,12 +2,12 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Translatable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\Builders\Delay;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Locale implements Buildable, Extension, Delay
@@ -15,7 +15,7 @@ class Locale implements Buildable, Extension, Delay
     const MACRO_METHOD = 'locale';
 
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     private $classMetadata;
 
@@ -27,10 +27,10 @@ class Locale implements Buildable, Extension, Delay
     /**
      * Locale constructor.
      *
-     * @param ClassMetadata $classMetadata
-     * @param string        $fieldName
+     * @param ExtensibleClassMetadata $classMetadata
+     * @param string                  $fieldName
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName)
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

@@ -2,16 +2,16 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Tree\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Relations\ManyToOne;
 
 class TreeSelfReference implements Buildable
 {
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     protected $classMetadata;
 
@@ -26,11 +26,11 @@ class TreeSelfReference implements Buildable
     private $key;
 
     /**
-     * @param ClassMetadata $classMetadata
-     * @param string        $fieldName
-     * @param string        $key
+     * @param ExtensibleClassMetadata $classMetadata
+     * @param string                  $fieldName
+     * @param string                  $key
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName, $key)
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName, $key)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

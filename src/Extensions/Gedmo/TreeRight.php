@@ -2,19 +2,19 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Tree\Mapping\Driver\Fluent as FluentDriver;
 use Gedmo\Tree\Mapping\Validator;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 class TreeRight implements Buildable
 {
     const MACRO_METHOD = 'treeRight';
 
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     protected $classMetadata;
 
@@ -24,10 +24,10 @@ class TreeRight implements Buildable
     protected $fieldName;
 
     /**
-     * @param ClassMetadata $classMetadata
+     * @param ExtensibleClassMetadata $classMetadata
      * @param string                  $fieldName
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName)
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

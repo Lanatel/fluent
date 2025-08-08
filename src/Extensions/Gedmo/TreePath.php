@@ -2,11 +2,11 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Tree\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 class TreePath implements Buildable
 {
@@ -15,7 +15,7 @@ class TreePath implements Buildable
     const DEFAULT_SEPARATOR = '|';
 
     /**
-     * @var ClassMetadata
+     * @var ExtensibleClassMetadata
      */
     protected $classMetadata;
 
@@ -45,11 +45,11 @@ class TreePath implements Buildable
     protected $endsWithSeparator = true;
 
     /**
-     * @param ClassMetadata $classMetadata
-     * @param string        $fieldName
-     * @param string        $separator
+     * @param ExtensibleClassMetadata $classMetadata
+     * @param string                  $fieldName
+     * @param string                  $separator
      */
-    public function __construct(ClassMetadata $classMetadata, $fieldName, $separator = self::DEFAULT_SEPARATOR)
+    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName, $separator = self::DEFAULT_SEPARATOR)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;
