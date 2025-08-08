@@ -2,10 +2,10 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Sortable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Relations\ManyToMany;
 use LaravelDoctrine\Fluent\Relations\ManyToOne;
 
@@ -14,7 +14,7 @@ class SortableGroup implements Buildable
     const MACRO_METHOD = 'sortableGroup';
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
@@ -24,10 +24,10 @@ class SortableGroup implements Buildable
     protected $fieldName;
 
     /**
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $fieldName
+     * @param ClassMetadata $classMetadata
+     * @param string        $fieldName
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
+    public function __construct(ClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

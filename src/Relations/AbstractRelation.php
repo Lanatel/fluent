@@ -6,10 +6,10 @@ use BadMethodCallException;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\ORM\Mapping\Builder\AssociationBuilder;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Builders\Traits\Queueable;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 /**
  * @method $this orphanRemoval()
@@ -125,7 +125,7 @@ abstract class AbstractRelation implements Relation
     }
 
     /**
-     * @return \Doctrine\ORM\Mapping\ClassMetadata|ExtensibleClassMetadata
+     * @return ClassMetadata
      */
     public function getClassMetadata()
     {

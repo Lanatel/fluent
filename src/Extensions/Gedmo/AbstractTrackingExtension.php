@@ -2,13 +2,13 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 abstract class AbstractTrackingExtension
 {
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
@@ -39,11 +39,7 @@ abstract class AbstractTrackingExtension
      */
     abstract protected function getExtensionName();
 
-    /**
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $fieldName
-     */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
+    public function __construct(ClassMetadata $classMetadata, string $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

@@ -38,7 +38,7 @@ class ExtensionFactoryTest extends ExtensibleClassMetadataFactory
      * This is the only sane way of testing the small part of what we do in this factory.
      * Every other test would require infinite mocking.
      *
-     * @return ExtensibleClassMetadata|ClassMetadata
+     * @return ExtensibleClassMetadata
      */
     public function getClassMetadataInstance()
     {

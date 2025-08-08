@@ -11,7 +11,6 @@ use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Traits\Macroable;
 use LaravelDoctrine\Fluent\Builders\Traits\Queueable;
 use LaravelDoctrine\Fluent\Builders\Traits\QueuesMacros;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Gedmo\GedmoFieldHints;
 
 /**
@@ -123,7 +122,7 @@ class Field implements Buildable
     }
 
     /**
-     * @return ClassMetadata|ExtensibleClassMetadata
+     * @return ClassMetadata
      */
     public function getClassMetadata()
     {

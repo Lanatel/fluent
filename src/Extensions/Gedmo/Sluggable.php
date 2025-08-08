@@ -7,7 +7,6 @@ use Gedmo\Exception\InvalidArgumentException;
 use Gedmo\Sluggable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Sluggable implements Buildable, Extension
@@ -15,7 +14,7 @@ class Sluggable implements Buildable, Extension
     const MACRO_METHOD = 'sluggable';
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
@@ -89,11 +88,11 @@ class Sluggable implements Buildable, Extension
     ];
 
     /**
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $fieldName
-     * @param array|string            $fields
+     * @param ClassMetadata $classMetadata
+     * @param string        $fieldName
+     * @param array|string  $fields
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName, $fields)
+    public function __construct(ClassMetadata $classMetadata, $fieldName, $fields)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

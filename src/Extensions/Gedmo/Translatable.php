@@ -2,10 +2,10 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Translatable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Translatable implements Buildable, Extension
@@ -13,7 +13,7 @@ class Translatable implements Buildable, Extension
     const MACRO_METHOD = 'translatable';
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
@@ -23,10 +23,10 @@ class Translatable implements Buildable, Extension
     protected $fieldName;
 
     /**
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $fieldName
+     * @param ClassMetadata $classMetadata
+     * @param string        $fieldName
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
+    public function __construct(ClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

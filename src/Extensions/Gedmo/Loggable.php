@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Loggable\Mapping\Driver\Fluent;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Builder;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class Loggable implements Buildable, Extension
 {
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     private $classMetadata;
 
@@ -22,10 +21,10 @@ class Loggable implements Buildable, Extension
     private $logEntry;
 
     /**
-     * @param ExtensibleClassMetadata|ClassMetadata $classMetadata
+     * @param ClassMetadata $classMetadata
      * @param string|null                           $logEntry
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $logEntry = null)
+    public function __construct(ClassMetadata $classMetadata, $logEntry = null)
     {
         $this->classMetadata = $classMetadata;
         $this->logEntry = $logEntry;

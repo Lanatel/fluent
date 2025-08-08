@@ -2,11 +2,11 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\SoftDeleteable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\Builders\Field;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 use LaravelDoctrine\Fluent\Extensions\Extension;
 
 class SoftDeleteable implements Buildable, Extension
@@ -14,7 +14,7 @@ class SoftDeleteable implements Buildable, Extension
     const MACRO_METHOD = 'softDelete';
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
@@ -34,10 +34,10 @@ class SoftDeleteable implements Buildable, Extension
     protected $timeAware = false;
 
     /**
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $fieldName
+     * @param ClassMetadata $classMetadata
+     * @param string        $fieldName
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $fieldName)
+    public function __construct(ClassMetadata $classMetadata, $fieldName)
     {
         $this->classMetadata = $classMetadata;
         $this->fieldName = $fieldName;

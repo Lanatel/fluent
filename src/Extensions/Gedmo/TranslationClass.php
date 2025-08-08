@@ -2,17 +2,17 @@
 
 namespace LaravelDoctrine\Fluent\Extensions\Gedmo;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Gedmo\Translatable\Mapping\Driver\Fluent as FluentDriver;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Builder;
-use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 class TranslationClass implements Buildable
 {
     const MACRO_METHOD = 'translationClass';
 
     /**
-     * @var ExtensibleClassMetadata
+     * @var ClassMetadata
      */
     private $classMetadata;
 
@@ -24,10 +24,10 @@ class TranslationClass implements Buildable
     /**
      * Locale constructor.
      *
-     * @param ExtensibleClassMetadata $classMetadata
-     * @param string                  $class
+     * @param ClassMetadata $classMetadata
+     * @param string        $class
      */
-    public function __construct(ExtensibleClassMetadata $classMetadata, $class)
+    public function __construct(ClassMetadata $classMetadata, $class)
     {
         $this->classMetadata = $classMetadata;
         $this->class = $class;
