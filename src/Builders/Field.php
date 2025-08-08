@@ -83,9 +83,7 @@ class Field implements Buildable
         $this->fieldBuilder = $fieldBuilder;
         $this->metaDatabuilder = $builder;
 
-        $extensibleClassMetadata = $builder->getClassMetadata();
-        assert($extensibleClassMetadata instanceof ExtensibleClassMetadata);
-        $this->classMetadata = $extensibleClassMetadata;
+        $this->classMetadata = $builder->getClassMetadata();
 
         $this->type = $type;
         $this->name = $name;

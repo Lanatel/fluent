@@ -5,6 +5,7 @@ namespace Tests\Relations;
 use BadMethodCallException;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use InvalidArgumentException;
+use LaravelDoctrine\Fluent\Relations\Relation;
 use PHPUnit\Framework\TestCase;
 
 class RelationTestCase extends TestCase
