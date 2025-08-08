@@ -86,7 +86,7 @@ class AssociationOverride implements Buildable
 
         // Give the original join table name, so we won't
         // accidentally remove custom join table names
-        if ($this->hasJoinTable($source)) {
+        if ($this->hasJoinTable((array) $source)) {
             $associationBuilder->setJoinTable($source->joinTable->name);
         }
 
@@ -109,7 +109,7 @@ class AssociationOverride implements Buildable
         $overrideMapping = [];
 
         // ManyToMany mappings
-        if ($this->hasJoinTable($target)) {
+        if ($this->hasJoinTable((array) $target)) {
             $overrideMapping['joinTable'] = $this->mapJoinTable(
                 $target->joinTable,
                 $source->joinTable
@@ -117,7 +117,7 @@ class AssociationOverride implements Buildable
         }
 
         // ManyToOne mappings
-        if ($this->hasJoinColumns($target)) {
+        if ($this->hasJoinColumns((array) $target)) {
             $overrideMapping['joinColumns'] = $this->mapJoinColumns(
                 $target->joinColumns,
                 $source->joinColumns
@@ -174,14 +174,14 @@ class AssociationOverride implements Buildable
     {
         $joinTable['name'] = $target->name;
 
-        if ($this->hasJoinColumns($target)) {
+        if ($this->hasJoinColumns((array) $target)) {
             $joinTable['joinColumns'] = $this->mapJoinColumns(
                 $target->joinColumns,
                 $source->joinColumns
             );
         }
 
-        if ($this->hasInverseJoinColumns($target)) {
+        if ($this->hasInverseJoinColumns((array) $target)) {
             $joinTable['inverseJoinColumns'] = $this->mapJoinColumns(
                 $target->inverseJoinColumns,
                 $source->inverseJoinColumns
@@ -218,32 +218,32 @@ class AssociationOverride implements Buildable
     }
 
     /**
-     * @param ArrayAccess $target
+     * @param array $target
      *
      * @return bool
      */
-    protected function hasJoinColumns(ArrayAccess $target)
+    protected function hasJoinColumns(array $target = [])
     {
-        return isset($target->joinColumns);
+        return isset($target['joinColumns']);
     }
 
     /**
-     * @param ArrayAccess $target
+     * @param array $target
      *
      * @return bool
      */
-    protected function hasInverseJoinColumns(ArrayAccess $target)
+    protected function hasInverseJoinColumns(array $target = [])
     {
-        return isset($target->inverseJoinColumns);
+        return isset($target['inverseJoinColumns']);
     }
 
     /**
-     * @param ArrayAccess $target
+     * @param array $target
      *
      * @return bool
      */
-    protected function hasJoinTable(ArrayAccess $target)
+    protected function hasJoinTable(array $target = [])
     {
-        return isset($target->joinTable);
+        return isset($target['joinTable']);
     }
 }
