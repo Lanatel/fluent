@@ -1,6 +1,5 @@
 {
-  "name": "activated-insights/laravel-doctrine-fluent",
-  "version": "dev-orm-3.1-update",
+  "name": "laravel-doctrine/fluent",
   "description": "A fluent PHP mapping driver for Doctrine2.",
   "license": "MIT",
   "keywords": [
