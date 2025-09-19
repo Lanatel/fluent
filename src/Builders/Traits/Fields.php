@@ -81,7 +81,7 @@ trait Fields
      */
     public function object($name, ?callable $callback = null)
     {
-        return $this->field(Types::OBJECT, $name, $callback);
+        return $this->field(Types::JSON, $name, $callback);
     }
 
     /**

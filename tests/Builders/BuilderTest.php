@@ -65,7 +65,7 @@ class BuilderTest extends TestCase
         'bigInteger'       => Types::BIGINT,
         'float'            => Types::FLOAT,
         'decimal'          => Types::DECIMAL,
-        'object'           => Types::OBJECT,
+        'object'           => Types::JSON,
         'boolean'          => Types::BOOLEAN,
         'jsonArray'        => Types::JSON,
         'date'             => Types::DATE_MUTABLE,
@@ -82,7 +82,7 @@ class BuilderTest extends TestCase
         'binary'           => Types::BINARY,
         'guid'             => Types::GUID,
         'blob'             => Types::BLOB,
-        'array'            => Types::ARRAY,
+        'array'            => Types::JSON,
         'simpleArray'      => Types::SIMPLE_ARRAY,
     ];
 

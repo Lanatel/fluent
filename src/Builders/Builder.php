@@ -153,7 +153,7 @@ class Builder extends AbstractBuilder implements Fluent
      */
     protected function setArray($name, ?callable $callback = null)
     {
-        return $this->field(Types::ARRAY, $name, $callback);
+        return $this->field(Types::JSON, $name, $callback);
     }
 
     /**
