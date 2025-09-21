@@ -7,17 +7,12 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 
 class ExtensibleClassMetadataFactory extends ClassMetadataFactory
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
+    protected EntityManagerInterface $entityManager;
 
     /**
      * Override to hold a reference to the EntityManager here as well (parent property is private).
-     *
-     * {@inheritdoc}
      */
-    public function setEntityManager(EntityManagerInterface $em)
+    public function setEntityManager(EntityManagerInterface $em): void
     {
         parent::setEntityManager($em);
 
@@ -26,10 +21,8 @@ class ExtensibleClassMetadataFactory extends ClassMetadataFactory
 
     /**
      * Override to implement our custom ClassMetadata object.
-     *
-     * {@inheritdoc}
      */
-    protected function newClassMetadataInstance($className)
+    protected function newClassMetadataInstance(string $className): ExtensibleClassMetadata
     {
         return new ExtensibleClassMetadata($className, $this->entityManager->getConfiguration()->getNamingStrategy());
     }

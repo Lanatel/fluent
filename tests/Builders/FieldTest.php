@@ -5,7 +5,7 @@ namespace Tests\Builders;
 use BadMethodCallException;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Field;
@@ -32,7 +32,7 @@ class FieldTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(StubEntity::class));
         $this->builder->setTable('stub_entities');
 
         $this->field = Field::make($this->builder, 'string', 'name');
@@ -111,7 +111,7 @@ class FieldTest extends TestCase
 
         $this->field->build();
 
-        $this->assertTrue($this->builder->getClassMetadata()->generatorType == ClassMetadataInfo::GENERATOR_TYPE_AUTO);
+        $this->assertTrue($this->builder->getClassMetadata()->generatorType == ClassMetadata::GENERATOR_TYPE_AUTO);
     }
 
     public function test_can_enrich_generated_value_with_a_closure()
@@ -348,7 +348,7 @@ class FieldTest extends TestCase
 
     private function doTestValidTypeForVersioning($type)
     {
-        $builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
+        $builder = new ClassMetadataBuilder(new ClassMetadata(StubEntity::class));
         $field = Field::make($builder, $type, "{$type}Field");
 
         $field->useForVersioning()->build();
@@ -360,7 +360,7 @@ class FieldTest extends TestCase
 
     private function doTestInvalidTypeForVersioning($type)
     {
-        $builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
+        $builder = new ClassMetadataBuilder(new ClassMetadata(StubEntity::class));
         $field = Field::make($builder, $type, 'aField');
 
         $this->expectException(MappingException::class);

@@ -2,10 +2,10 @@
 
 namespace LaravelDoctrine\Fluent\Relations;
 
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
+use LaravelDoctrine\Fluent\Relations\Mappings\Association\ConcreteAssociationMapping;
 
 class AssociationCache implements Buildable
 {
@@ -20,12 +20,12 @@ class AssociationCache implements Buildable
     protected $usage;
 
     /**
-     * @var array
+     * @var array<string, int>
      */
     protected $usages = [
-        'READ_ONLY'            => ClassMetadataInfo::CACHE_USAGE_READ_ONLY,
-        'NONSTRICT_READ_WRITE' => ClassMetadataInfo::CACHE_USAGE_NONSTRICT_READ_WRITE,
-        'READ_WRITE'           => ClassMetadataInfo::CACHE_USAGE_READ_WRITE,
+        'READ_ONLY'            => ClassMetadata::CACHE_USAGE_READ_ONLY,
+        'NONSTRICT_READ_WRITE' => ClassMetadata::CACHE_USAGE_NONSTRICT_READ_WRITE,
+        'READ_WRITE'           => ClassMetadata::CACHE_USAGE_READ_WRITE,
     ];
 
     /**
@@ -104,8 +104,16 @@ class AssociationCache implements Buildable
     /**
      * Execute the build process.
      */
-    public function build()
+    public function build(string $targetEntity = ''): void
     {
+        if (!isset($this->metadata->associationMappings[$this->field])) {
+            $this->metadata->associationMappings[$this->field] = new ConcreteAssociationMapping(
+                $this->field,
+                $this->metadata->rootEntityName,
+                $targetEntity
+            );
+        }
+
         $this->metadata->enableAssociationCache($this->field, [
             'usage'  => $this->getUsage(),
             'region' => $this->getRegion(),

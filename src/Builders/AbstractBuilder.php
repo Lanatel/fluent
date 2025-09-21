@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use Doctrine\ORM\Mapping\NamingStrategy;
+use LaravelDoctrine\Fluent\Extensions\ExtensibleClassMetadata;
 
 abstract class AbstractBuilder
 {
@@ -38,7 +39,7 @@ abstract class AbstractBuilder
     }
 
     /**
-     * @return ClassMetadata
+     * @return ClassMetadata|ExtensibleClassMetadata
      */
     public function getClassMetadata()
     {

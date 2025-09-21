@@ -39,7 +39,7 @@ class Table extends AbstractBuilder implements Buildable
      */
     public function setName($name)
     {
-        $this->builder->setTable($name);
+        $this->getClassMetadata()->setPrimaryTable(['name' => $name]);
 
         return $this;
     }

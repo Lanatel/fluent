@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/packagist/l/laravel-doctrine/fluent.svg?style=flat-square)](https://packagist.org/packages/laravel-doctrine/fluent)
 [![Github actions](https://github.com/laravel-doctrine/fluent/workflows/CI/badge.svg?branch=1.x)](https://github.com/laravel-doctrine/fluent/actions?query=workflow%3ACI+branch%3A1.x)
 
-*A fluent mapping driver for Doctrine2*
+*A fluent mapping driver for Doctrine3*
 
 ```
 composer require laravel-doctrine/fluent

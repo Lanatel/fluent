@@ -3,7 +3,7 @@
 namespace LaravelDoctrine\Fluent\Builders;
 
 use Doctrine\ORM\Mapping\Builder\FieldBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Buildable;
 
 class GeneratedValue implements Buildable
@@ -39,15 +39,15 @@ class GeneratedValue implements Buildable
     protected $generator;
 
     /**
-     * @var ClassMetadataInfo
+     * @var ClassMetadata
      */
     protected $classMetadata;
 
     /**
-     * @param FieldBuilder      $builder
-     * @param ClassMetadataInfo $classMetadata
+     * @param FieldBuilder  $builder
+     * @param ClassMetadata $classMetadata
      */
-    public function __construct(FieldBuilder $builder, ClassMetadataInfo $classMetadata)
+    public function __construct(FieldBuilder $builder, ClassMetadata $classMetadata)
     {
         $this->builder = $builder;
         $this->classMetadata = $classMetadata;

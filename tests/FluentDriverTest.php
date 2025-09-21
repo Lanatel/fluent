@@ -3,9 +3,8 @@
 namespace Tests;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Builder;
 use LaravelDoctrine\Fluent\EntityMapping;
 use LaravelDoctrine\Fluent\Fluent;
@@ -30,7 +29,7 @@ class FluentDriverTest extends TestCase
         $driver->addMapping(new FakeClassMapping());
         $driver->loadMetadataForClass(
             FakeEntity::class,
-            new ClassMetadataInfo(FakeEntity::class)
+            new ClassMetadata(FakeEntity::class)
         );
 
         $this->assertInstanceOf(
@@ -46,7 +45,7 @@ class FluentDriverTest extends TestCase
         $driver->addMapping(new StubEmbeddableMapping());
         $driver->loadMetadataForClass(
             StubEmbeddable::class,
-            new ClassMetadataInfo(StubEmbeddable::class)
+            new ClassMetadata(StubEmbeddable::class)
         );
 
         $this->assertInstanceOf(
@@ -62,7 +61,7 @@ class FluentDriverTest extends TestCase
         $driver->addMapping(new StubMappedSuperClassMapping());
         $driver->loadMetadataForClass(
             StubMappedSuperClass::class,
-            new ClassMetadataInfo(StubMappedSuperClass::class)
+            new ClassMetadata(StubMappedSuperClass::class)
         );
 
         $this->assertInstanceOf(
@@ -81,7 +80,7 @@ class FluentDriverTest extends TestCase
 
         $driver->loadMetadataForClass(
             StubEntity::class,
-            new ClassMetadataInfo(StubEntity::class)
+            new ClassMetadata(StubEntity::class)
         );
         $this->assertInstanceOf(
             EntityMapper::class,
@@ -90,7 +89,7 @@ class FluentDriverTest extends TestCase
 
         $driver->loadMetadataForClass(
             StubEmbeddable::class,
-            new ClassMetadataInfo(StubEmbeddable::class)
+            new ClassMetadata(StubEmbeddable::class)
         );
         $this->assertInstanceOf(
             EmbeddableMapper::class,
@@ -99,7 +98,7 @@ class FluentDriverTest extends TestCase
 
         $driver->loadMetadataForClass(
             StubMappedSuperClass::class,
-            new ClassMetadataInfo(StubMappedSuperClass::class)
+            new ClassMetadata(StubMappedSuperClass::class)
         );
         $this->assertInstanceOf(
             MappedSuperClassMapper::class,
@@ -212,7 +211,7 @@ class FluentDriverTest extends TestCase
 
         $driver->loadMetadataForClass(
             FakeEntity::class,
-            new ClassMetadataInfo(FakeEntity::class)
+            new ClassMetadata(FakeEntity::class)
         );
     }
 
@@ -228,7 +227,7 @@ class FluentDriverTest extends TestCase
         $mapping->expects($this->once())->method('map')->with($this->isInstanceOf(CustomBuilder::class));
 
         $driver->getMappers()->addMapper('fake', new EntityMapper($mapping));
-        $driver->loadMetadataForClass('fake', new ClassMetadataInfo('fake'));
+        $driver->loadMetadataForClass('fake', new ClassMetadata('fake'));
     }
 }
 

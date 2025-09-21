@@ -3,7 +3,7 @@
 namespace LaravelDoctrine\Fluent\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
@@ -116,7 +116,7 @@ class AttributeOverride implements Buildable
     {
         $metadata = $builder->getClassMetadata();
 
-        return $metadata->getFieldMapping($this->name);
+        return (array) $metadata->getFieldMapping($this->name);
     }
 
     /**
@@ -125,7 +125,7 @@ class AttributeOverride implements Buildable
     protected function newClassMetadataBuilder()
     {
         return new ClassMetadataBuilder(
-            new ClassMetadataInfo($this->builder->getClassMetadata()->name)
+            new ClassMetadata($this->builder->getClassMetadata()->name)
         );
     }
 

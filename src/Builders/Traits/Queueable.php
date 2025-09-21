@@ -4,6 +4,7 @@ namespace LaravelDoctrine\Fluent\Builders\Traits;
 
 use LaravelDoctrine\Fluent\Buildable;
 use LaravelDoctrine\Fluent\Builders\Delay;
+use LaravelDoctrine\Fluent\Relations\AssociationCache;
 
 trait Queueable
 {
@@ -43,7 +44,9 @@ trait Queueable
             if ($buildable instanceof Delay) {
                 $delayed[] = $buildable;
             } else {
-                $buildable->build();
+                $buildable instanceof AssociationCache ?
+                    $buildable->build($this->entity) :
+                    $buildable->build();
             }
         }
 

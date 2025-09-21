@@ -5,7 +5,7 @@ namespace Tests\Builders;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use Doctrine\ORM\Mapping\MappingException;
 use DoctrineExtensions\Types\CarbonDateTimeType;
@@ -97,7 +97,7 @@ class BuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             FluentEntity::class
         ));
 

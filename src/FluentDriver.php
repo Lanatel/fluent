@@ -3,6 +3,7 @@
 namespace LaravelDoctrine\Fluent;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata as ORMClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use Doctrine\Persistence\Mapping\ClassMetadata;
@@ -34,7 +35,7 @@ class FluentDriver implements MappingDriver
         array $mappings = [],
         ?NamingStrategy $namingStrategy = null
     ) {
-        $this->fluentFactory = function (ClassMetadata $metadata) use ($namingStrategy) {
+        $this->fluentFactory = function (ORMClassMetadata $metadata) use ($namingStrategy) {
             return new Builder(new ClassMetadataBuilder($metadata), $namingStrategy);
         };
 

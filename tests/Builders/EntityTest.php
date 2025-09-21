@@ -3,7 +3,7 @@
 namespace Tests\Builders;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Entity;
 use LaravelDoctrine\Fluent\Builders\Traits\Macroable;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -27,7 +27,7 @@ class EntityTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(StubEntity::class));
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(StubEntity::class));
         $this->entity = new Entity($this->builder);
     }
 
@@ -52,11 +52,11 @@ class EntityTest extends TestCase
         $this->assertFalse($this->builder->getClassMetadata()->isReadOnly);
 
         $this->entity->cacheable();
-        $this->assertEquals(ClassMetadataInfo::CACHE_USAGE_READ_ONLY, $this->builder->getClassMetadata()->cache['usage']);
+        $this->assertEquals(ClassMetadata::CACHE_USAGE_READ_ONLY, $this->builder->getClassMetadata()->cache['usage']);
         $this->assertEquals('tests_stubs_entities_stubentity', $this->builder->getClassMetadata()->cache['region']);
 
-        $this->entity->cacheable(ClassMetadataInfo::CACHE_USAGE_READ_WRITE, 'custom_region');
-        $this->assertEquals(ClassMetadataInfo::CACHE_USAGE_READ_WRITE, $this->builder->getClassMetadata()->cache['usage']);
+        $this->entity->cacheable(ClassMetadata::CACHE_USAGE_READ_WRITE, 'custom_region');
+        $this->assertEquals(ClassMetadata::CACHE_USAGE_READ_WRITE, $this->builder->getClassMetadata()->cache['usage']);
         $this->assertEquals('custom_region', $this->builder->getClassMetadata()->cache['region']);
     }
 

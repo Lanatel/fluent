@@ -125,7 +125,7 @@ class JoinColumn
      */
     public function getJoinColumn()
     {
-        return $this->joinColumn ?: $this->namingStrategy->joinColumnName($this->relation);
+        return $this->joinColumn ?: $this->namingStrategy->joinColumnName($this->relation, '');
     }
 
     /**

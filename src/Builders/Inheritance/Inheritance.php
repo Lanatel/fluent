@@ -2,7 +2,7 @@
 
 namespace LaravelDoctrine\Fluent\Builders\Inheritance;
 
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 interface Inheritance
 {
@@ -12,7 +12,7 @@ interface Inheritance
      * @link http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#single-table-inheritance
      *       Doctine documentation
      */
-    const SINGLE = ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE;
+    const SINGLE = ClassMetadata::INHERITANCE_TYPE_SINGLE_TABLE;
 
     /**
      * Set inheritance to joined table mode.
@@ -20,7 +20,7 @@ interface Inheritance
      * @link http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#class-table-inheritance
      *       Doctine documentation
      */
-    const JOINED = ClassMetadataInfo::INHERITANCE_TYPE_JOINED;
+    const JOINED = ClassMetadata::INHERITANCE_TYPE_JOINED;
 
     /**
      * Add the discriminator column.

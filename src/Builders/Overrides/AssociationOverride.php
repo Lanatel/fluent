@@ -3,10 +3,11 @@
 namespace LaravelDoctrine\Fluent\Builders\Overrides;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\NamingStrategy;
 use InvalidArgumentException;
 use LaravelDoctrine\Fluent\Buildable;
+use LaravelDoctrine\Fluent\Relations\AssociationCache;
 use LaravelDoctrine\Fluent\Relations\ManyToMany;
 use LaravelDoctrine\Fluent\Relations\ManyToOne;
 use LaravelDoctrine\Fluent\Relations\Relation;
@@ -37,8 +38,8 @@ class AssociationOverride implements Buildable
      * @var array
      */
     protected $relations = [
-        ClassMetadataInfo::MANY_TO_ONE  => ManyToOne::class,
-        ClassMetadataInfo::MANY_TO_MANY => ManyToMany::class,
+        ClassMetadata::MANY_TO_ONE  => ManyToOne::class,
+        ClassMetadata::MANY_TO_MANY => ManyToMany::class,
     ];
 
     /**
@@ -95,7 +96,9 @@ class AssociationOverride implements Buildable
             throw new InvalidArgumentException('The callback should return an instance of '.Relation::class);
         }
 
-        $association->build();
+        $association instanceof AssociationCache ?
+            $association->build($source['targetEntity']) :
+            $association->build();
 
         $target = $this->convertToMappingArray($builder);
 
@@ -104,8 +107,8 @@ class AssociationOverride implements Buildable
         // ManyToMany mappings
         if ($this->hasJoinTable($target)) {
             $overrideMapping['joinTable'] = $this->mapJoinTable(
-                $target['joinTable'],
-                $source['joinTable']
+                (array) $target['joinTable'],
+                (array) $source['joinTable']
             );
         }
 
@@ -134,7 +137,10 @@ class AssociationOverride implements Buildable
     {
         $metadata = $builder->getClassMetadata();
 
-        return $metadata->getAssociationMapping($this->name);
+        $associationMappingArray = (array) $metadata->getAssociationMapping($this->name);
+        $associationMappingArray['type'] = $metadata->getAssociationMapping($this->name)->type();
+
+        return $associationMappingArray;
     }
 
     /**
@@ -143,7 +149,7 @@ class AssociationOverride implements Buildable
     protected function newClassMetadataBuilder()
     {
         return new ClassMetadataBuilder(
-            new ClassMetadataInfo($this->builder->getClassMetadata()->name)
+            new ClassMetadata($this->builder->getClassMetadata()->name)
         );
     }
 
@@ -205,7 +211,7 @@ class AssociationOverride implements Buildable
         $joinColumns = [];
         foreach ($target as $index => $joinColumn) {
             if (isset($source[$index])) {
-                $diff = array_diff($joinColumn, $source[$index]);
+                $diff = array_diff((array) $joinColumn, (array) $source[$index]);
 
                 if (!empty($diff)) {
                     $joinColumns[] = $diff;

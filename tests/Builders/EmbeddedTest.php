@@ -3,7 +3,7 @@
 namespace Tests\Builders;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultNamingStrategy;
 use LaravelDoctrine\Fluent\Builders\Embedded;
 use PHPUnit\Framework\TestCase;
@@ -22,7 +22,7 @@ class EmbeddedTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             FluentEmbeddable::class
         ));
 

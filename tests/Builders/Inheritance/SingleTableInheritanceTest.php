@@ -3,7 +3,7 @@
 namespace Tests\Builders\Inheritance;
 
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LaravelDoctrine\Fluent\Builders\Inheritance\SingleTableInheritance;
 use Tests\Stubs\Entities\StubEntity;
 
@@ -21,7 +21,7 @@ class SingleTableInheritanceTest extends InheritanceTestCase
 
     protected function setUp(): void
     {
-        $this->builder = new ClassMetadataBuilder(new ClassMetadataInfo(
+        $this->builder = new ClassMetadataBuilder(new ClassMetadata(
             StubEntity::class
         ));
 
