@@ -124,7 +124,7 @@ class AssociationOverrideTest extends TestCase
 
     public function test_can_change_source_on_many_to_one()
     {
-        $this->assertEquals('id', $this->builder->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals('id', $this->builder->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]->referencedColumnName);
 
         $override = $this->override('manyToOne', function (ManyToOne $relation) {
             return $relation->source('local_key');
@@ -132,7 +132,7 @@ class AssociationOverrideTest extends TestCase
 
         $override->build();
 
-        $this->assertEquals('local_key', $this->builder->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]['referencedColumnName']);
+        $this->assertEquals('local_key', $this->builder->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]->referencedColumnName);
     }
 
     public function test_can_change_target_on_many_to_one()

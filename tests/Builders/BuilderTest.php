@@ -751,8 +751,9 @@ class BuilderTest extends TestCase
             'target_id',
             $this->fluent->getClassMetadata()->getAssociationMapping('manyToOne')['joinColumns'][0]['name']
         );
+
         $this->assertEquals('source_id', $this->fluent->getClassMetadata()
-                                                      ->getAssociationMapping('manyToOne')['joinColumns'][0]['referencedColumnName']);
+            ->getAssociationMapping('manyToOne')['joinColumns'][0]->referencedColumnName);
     }
 
     public function test_can_override_many_to_many_association()
@@ -770,7 +771,7 @@ class BuilderTest extends TestCase
             $this->fluent->getClassMetadata()->getAssociationMapping('manyToMany')['joinTable']['name']
         );
         $this->assertEquals('source_id', $this->fluent->getClassMetadata()
-                                                      ->getAssociationMapping('manyToMany')['joinTable']['joinColumns'][0]['name']);
+            ->getAssociationMapping('manyToMany')['joinTable']['joinColumns'][0]['name']);
     }
 
     public function test_can_guess_a_one_to_one_relation_name()
