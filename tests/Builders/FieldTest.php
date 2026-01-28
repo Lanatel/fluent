@@ -244,7 +244,7 @@ class FieldTest extends TestCase
 
     public function test_array_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning('array');
+        $this->doTestInvalidTypeForVersioning('json');
     }
 
     public function test_simple_array_cannot_be_used_for_versioning()
@@ -284,7 +284,7 @@ class FieldTest extends TestCase
 
     public function test_object_cannot_be_used_for_versioning()
     {
-        $this->doTestInvalidTypeForVersioning('object');
+        $this->doTestInvalidTypeForVersioning('json');
     }
 
     public function test_string_cannot_be_used_for_versioning()
