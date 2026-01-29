@@ -8,6 +8,7 @@ on:
     branches:
       - "*.x"
       - "main"
+      - "test-ci"
 jobs:
   tests:
     runs-on: 'ubuntu-latest'
